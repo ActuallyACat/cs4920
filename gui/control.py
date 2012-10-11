@@ -4,7 +4,9 @@ Created on 08/10/2012
 @author: sebastien
 '''
 import bassic
-
+from noj.db_interface import *
+from noj.data_structures import *
+from backend_stubs import *
 
 class control(object):
     '''
@@ -18,6 +20,14 @@ class control(object):
         '''
         self.mode = ""
         self.gui = gui
+        self._dbi = None
+
+    @property
+    def dbi(self):
+        """Get the Database Interface lazily"""
+        if self._dbi is None:
+            self._dbi = DatabaseInterface('../sentence_library.db')
+        return self._dbi
         
     def test(self, str):
         
@@ -28,8 +38,10 @@ class control(object):
         
         if (self.mode == "dictionary"):
             if (str):
+                print dictionary_mode_search(str)
                 self.gui.dictionary_2.show()
                 self.gui.DictionaryWordsScrollArea.hide()
+                
             else:
                 self.gui.dictionary_2.hide()
         else:    

@@ -17,13 +17,13 @@ class control(object):
     '''
 
 
-    def __init__(self, gui):
-        '''
-        Constructor
-        '''
+    def __init__(self, gui=""):
         self.mode = ""
         self.gui = gui
         self._dbi = None
+        
+    def addGui(self, gui):
+        self.gui = gui
 
     @property
     def dbi(self):
@@ -119,3 +119,9 @@ class control(object):
         exporter = UEExporter(ue_list)
         exporter.export('exported_sentences.txt')
     
+
+
+
+if __name__ == "__main__":
+    control = control()
+    bassic.new(control)

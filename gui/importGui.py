@@ -64,11 +64,7 @@ class Ui_Import(QtGui.QDialog):
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
         '/home')
         
-        f = open(fname, 'r')
-        
-        with f:        
-            data = f.read()
-            #self.textEdit.setText(data) 
+        return fname
 
             
             

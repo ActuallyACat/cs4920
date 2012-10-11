@@ -16,8 +16,8 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        self.control = control.control(self)
+    def setupUi(self, MainWindow, control):
+        self.control = control
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(639, 411)
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -207,15 +207,17 @@ class Ui_MainWindow(object):
         self.actionExit.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+Q", None, QtGui.QApplication.UnicodeUTF8))
 
 
-def new():
+def new(control):
     import sys
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+    control.addGui(ui)
+    ui.setupUi(MainWindow, control)
     MainWindow.show()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
-    new()
+    control = control.control()
+    new(control)
     

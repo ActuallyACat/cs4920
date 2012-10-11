@@ -8,6 +8,7 @@ Created on 08/10/2012
 import bassic
 from noj.db_interface import *
 from noj.data_structures import *
+from noj.ue_exporter import *
 from backend_stubs import *
 
 class control(object):
@@ -69,7 +70,7 @@ class control(object):
                 for ue in list_of_ues:
                     print ue
                     self.gui.UEarea.addSentence(
-                            ue.expression, ue.meaning, 9.99)
+                            ue.expression, ue.meaning, 9.99, ue)
                     #if entry.kanji != [u'']:
                         #button_text = u"{} [{}]".format(entry.kana, 
                                 #entry.kanji_string())
@@ -105,7 +106,16 @@ class control(object):
         print meaning
         self.gui.DictionaryWordsScrollArea.clearSentences()
         for ue in meaning.usage_examples:
-            self.gui.DictionaryWordsScrollArea.addSentence(ue.expression, ue.meaning, 9.99)
+            self.gui.DictionaryWordsScrollArea.addSentence(ue.expression, ue.meaning, 9.99, ue)
         
         self.gui.DictionaryWordsScrollArea.show()
+
+    def export(self):
+        print "export button was pressed"
+        if (self.mode == "dictionary"):
+            ue_list = self.gui.DictionaryWordsScrollArea.getSentences()
+        else:
+            ue_list = self.gui.UEarea.getSentences()
+        exporter = UEExporter(ue_list)
+        exporter.export('exported_sentences.txt')
     

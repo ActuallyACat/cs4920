@@ -41,7 +41,7 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         #self.addSentence("trggets", "trggrgsrgsrgrgrggres", "0.67")
 
 
-    def addSentence(self, meaning, translation, score):
+    def addSentence(self, meaning, translation, score, ue):
         
         self.verticalLayout_5.removeItem(self.spacerItem)
         temp = QtGui.QWidget(self.scrollAreaWidgetContents_3)
@@ -49,6 +49,7 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         temp.meaning = meaning
         temp.translation = translation
         temp.score = score
+        temp.ue = ue
         
         temp.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         temp.setObjectName(_fromUtf8("example1"))
@@ -120,7 +121,6 @@ class Ui_ScrollArea(QtGui.QScrollArea):
     def getSentences(self):
         temp = []
         for sentence in self.sentences:
-            temp.append(sentence.meaning)
-            
+            temp.append(sentence.ue)
         return temp
             

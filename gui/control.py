@@ -63,7 +63,28 @@ class control(object):
             else:
                 self.gui.dictionary_2.hide()
         else:    
-            pass
+            self.gui.UEarea.clearSentences()
+            if (str):
+                list_of_ues = lookup_mode_search(str)
+                for ue in list_of_ues:
+                    print ue
+                    self.gui.UEarea.addSentence(
+                            ue.expression, ue.meaning, 9.99)
+                    #if entry.kanji != [u'']:
+                        #button_text = u"{} [{}]".format(entry.kana, 
+                                #entry.kanji_string())
+                        #print "kanji=".format(repr(entry.kanji))
+                    #else:
+                        #button_text = u"{}".format(entry.kana)
+
+                    #for meaning in entry.meanings:
+                        #self.gui.dictionaryWords.addMeaning(
+                                #button_text, meaning.meaning, meaning)
+                #self.gui.dictionary_2.show()
+                #self.gui.DictionaryWordsScrollArea.hide()
+                
+            #else:
+                #self.gui.dictionary_2.hide()
         
             
     def lookUpMode(self, str):

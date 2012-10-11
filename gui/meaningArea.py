@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from noj.data_structures import *
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -26,7 +27,7 @@ class Ui_meaningArea(QtGui.QWidget):
         self.meanings = []
         
         
-    def addEntry(self, meaning, translation):
+    def addMeaning(self, meaning, translation):
         
         meaningEntry = QtGui.QWidget(self)
         meaningEntry.setObjectName(_fromUtf8("meaningEntry"))
@@ -38,6 +39,7 @@ class Ui_meaningArea(QtGui.QWidget):
         meaningEntry.horizontalLayout_2.addWidget(meaningEntry.meaningButton)
         meaningEntry.meaningLabel = QtGui.QLabel(meaningEntry)
         meaningEntry.meaningLabel.setObjectName(_fromUtf8("meaningLabel"))
+        meaningEntry.meaningLabel.setWordWrap(True)
         meaningEntry.horizontalLayout_2.addWidget(meaningEntry.meaningLabel)
         self.verticalLayout.addWidget(meaningEntry)
         self.meanings.append(meaningEntry)

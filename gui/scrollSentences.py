@@ -35,10 +35,10 @@ class Ui_ScrollArea(QtGui.QScrollArea):
 
         QtCore.QMetaObject.connectSlotsByName(self)
         
-        self.addSentence("tets", "tes", "0.67")
-        self.addSentence("tets", "tesewfewfewg", "0.67")
-        self.addSentence("trsgrsets", "errggergrsges", "0.67")
-        self.addSentence("trggets", "trggrgsrgsrgrgrggres", "0.67")
+        #self.addSentence("tets", "tes", "0.67")
+        #self.addSentence("tets", "tesewfewfewg", "0.67")
+        #self.addSentence("trsgrsets", "errggergrsges", "0.67")
+        #self.addSentence("trggets", "trggrgsrgsrgrgrggres", "0.67")
 
 
     def addSentence(self, meaning, translation, score):
@@ -93,7 +93,7 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         temp.line_3.setFrameShadow(QtGui.QFrame.Sunken)
         temp.line_3.setObjectName(_fromUtf8("line_3"))
         
-        temp.label_2.setText(_fromUtf8(score))
+        temp.label_2.setText(_fromUtf8(str(score)))
         temp.example1sentence.setText(_fromUtf8(meaning))
         temp.example1translation.setText(_fromUtf8(translation))
         

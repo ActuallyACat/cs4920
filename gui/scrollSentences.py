@@ -45,6 +45,11 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         
         self.verticalLayout_5.removeItem(self.spacerItem)
         temp = QtGui.QWidget(self.scrollAreaWidgetContents_3)
+        
+        temp.meaning = meaning
+        temp.translation = translation
+        temp.score = score
+        
         temp.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         temp.setObjectName(_fromUtf8("example1"))
         temp.horizontalLayout = QtGui.QHBoxLayout(temp)
@@ -110,4 +115,10 @@ class Ui_ScrollArea(QtGui.QScrollArea):
             sentence.hide()
             sentence.destroy()
             
+    def getSentences(self):
+        temp = []
+        for sentence in self.sentences:
+            temp.append(sentence.meaning)
+            
+        return temp
             

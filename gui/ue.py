@@ -38,12 +38,12 @@ class Ui_UEarea(object):
         self.verticalLayout_7.addWidget(self.scrollAreaUE)
         
         # loop and add
-        self.addEntry("", "")
-        self.addEntry("", "")
-        self.addEntry("", "")
-        self.addEntry("", "")
-        self.addEntry("", "")
-        self.addEntry("", "")
+        self.addEntry("fe", "")
+        self.addEntry("cs", "")
+        self.addEntry("fes", "")
+        self.addEntry("czsc", "")
+        self.addEntry(" as", "")
+        self.addEntry("wq", "")
         self.addEntry("", "")
         self.addEntry("", "")
         self.addEntry("", "")
@@ -73,6 +73,7 @@ class Ui_UEarea(object):
         #usage example1
         usageExample = Ui_usageExampleSgl(self.scrollAreaUEWidgetContents)
         usageExample.setObjectName(_fromUtf8("usageExample"))
+        usageExample.addElement(label)
         
         self.verticalLayout_4.addWidget(usageExample)
         self.ue.append(usageExample)
@@ -94,30 +95,28 @@ class Ui_usageExampleSgl(QtGui.QWidget):
         self.horizontalLayout = QtGui.QHBoxLayout(self)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.words = []
-        #for part in self.words:
-        self.uepart1 = QtGui.QLabel(self)
-        self.uepart1.setObjectName(_fromUtf8("uepart1"))
-        self.horizontalLayout.addWidget(self.uepart1)
+        self.parts = []
+        for part in self.words:
+            temp = QtGui.QLabel(self)
+            temp.setObjectName(part)
+            temp.setText(part)
+            self.horizontalLayout.addWidget(temp)
+            self.parts.append(temp)
         
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
+        self.spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(self.spacerItem)
 
-        self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
+        
+    def addElement(self, text):
+        temp = QtGui.QLabel(self)
+        temp.setObjectName(text)
+        temp.setText(text)
+        self.horizontalLayout.addWidget(temp)
+        self.parts.append(temp)
+        self.horizontalLayout.removeItem(self.spacerItem)
+        self.horizontalLayout.addItem(self.spacerItem)
 
-    def retranslateUi(self, usageExample):
-        usageExample.setWindowTitle(QtGui.QApplication.translate("usageExample", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.uepart1.setText(QtGui.QApplication.translate("usageExample", "part1", None, QtGui.QApplication.UnicodeUTF8))
-
-    def dragEnterEvent(self, e):
-      
-        if e.mimeData().hasFormat('text/plain'):
-            e.accept()
-        else:
-            e.ignore() 
-
-    def dropEvent(self, e):
-        print e.mimeData().text()
         
 if __name__ == "__main__":
     import sys

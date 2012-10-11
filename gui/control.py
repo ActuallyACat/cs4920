@@ -5,7 +5,7 @@ Created on 08/10/2012
 
 @author: sebastien
 '''
-import bassic
+import bassic, importGui
 from noj.db_interface import *
 from noj.data_structures import *
 from noj.ue_exporter import *
@@ -119,7 +119,17 @@ class control(object):
         exporter = UEExporter(ue_list)
         exporter.export('exported_sentences.txt')
     
-
+    def importButton(self):
+        print "hello"
+        importWindow = importGui.Ui_Import()
+        importWindow.setText("Importing From: " + "here")
+        importWindow.show()
+        i = 0
+        while i < 100000:
+            importWindow.setProgress(i/1000)
+            i = i+1
+            print i/1000
+            
 
 
 if __name__ == "__main__":

@@ -159,15 +159,20 @@ class Ui_MainWindow(object):
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
         self.actionSettings = QtGui.QAction(MainWindow)
         self.actionSettings.setObjectName(_fromUtf8("actionSettings"))
+        self.actionImport = QtGui.QAction(MainWindow)
+        self.actionImport.setObjectName(_fromUtf8("actionImport"))
         self.actionExit = QtGui.QAction(MainWindow)
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
         self.menuTitle.addAction(self.actionExit)
         self.menuOptions.addAction(self.actionSettings)
+        self.menuOptions.addAction(self.actionImport)
         self.menuAbout.addAction(self.actionHelp)
         self.menuAbout.addAction(self.actionAbout)
         self.menubar.addAction(self.menuTitle.menuAction())
         self.menubar.addAction(self.menuOptions.menuAction())
         self.menubar.addAction(self.menuAbout.menuAction())
+        
+        self.actionImport.triggered.connect(lambda: control.importButton())
 
         self.retranslateUi(MainWindow)
         #button connection time
@@ -203,6 +208,7 @@ class Ui_MainWindow(object):
         self.actionHelp.setText(QtGui.QApplication.translate("MainWindow", "help", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setText(QtGui.QApplication.translate("MainWindow", "about", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSettings.setText(QtGui.QApplication.translate("MainWindow", "settings", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionImport.setText(QtGui.QApplication.translate("MainWindow", "Import", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExit.setText(QtGui.QApplication.translate("MainWindow", "exit", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExit.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+Q", None, QtGui.QApplication.UnicodeUTF8))
 

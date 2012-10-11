@@ -26,7 +26,7 @@ class Ui_meaningArea(QtGui.QWidget):
         self.meanings = []
         
         
-    def addMeaning(self, meaning, translation):
+    def addEntry(self, meaning, translation):
         
         meaningEntry = QtGui.QWidget(self)
         meaningEntry.setObjectName(_fromUtf8("meaningEntry"))

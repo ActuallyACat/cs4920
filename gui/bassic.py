@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import control, list, meaningArea, ue
+import control, list, meaningArea, ue, scrollSentences
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -124,7 +124,7 @@ class Ui_MainWindow(object):
         self.dictionaryWords.setMinimumSize(QtCore.QSize(100, 100))
         self.dictionaryWords.setObjectName(_fromUtf8("dictionaryWords"))
         self.verticalLayout_2.addWidget(self.dictionaryWords)
-        self.DictionaryWordsScrollArea = meaningArea.Ui_ScrollArea(self.dictionary_2)
+        self.DictionaryWordsScrollArea = scrollSentences.Ui_ScrollArea(self.dictionary_2)
         self.DictionaryWordsScrollArea.setObjectName(_fromUtf8("DictionaryWordsScrollArea"))
 
         self.verticalLayout_2.addWidget(self.DictionaryWordsScrollArea)

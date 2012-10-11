@@ -38,7 +38,12 @@ class control(object):
         
         if (self.mode == "dictionary"):
             if (str):
-                print dictionary_mode_search(str)
+                list_of_entries = dictionary_mode_search(str)
+                #print list_of_entries
+                self.gui.dictionaryWords.clearMeanings()
+                for entry in list_of_entries:
+                    print entry
+                    self.gui.dictionaryWords.addMeaning('meaning', 'translation')
                 self.gui.dictionary_2.show()
                 self.gui.DictionaryWordsScrollArea.hide()
                 

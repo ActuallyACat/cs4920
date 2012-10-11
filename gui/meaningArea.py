@@ -44,7 +44,6 @@ class Ui_meaningArea(QtGui.QWidget):
         
         meaningEntry.meaningButton.setText(meaning)
         meaningEntry.meaningLabel.setText(translation)
-        meaningEntry.de
         
         QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("meaning button pressed = " + meaningEntry.meaningButton.text()))
         QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.wordMeanings(meaningEntry.meaningButton.text()))

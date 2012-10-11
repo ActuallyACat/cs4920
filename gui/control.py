@@ -21,6 +21,7 @@ class control(object):
         self.mode = ""
         self.gui = gui
         self._dbi = None
+        self.importing = False
         
     def addGui(self, gui):
         self.gui = gui
@@ -120,7 +121,10 @@ class control(object):
         exporter.export('exported_sentences.txt')
     
     def importButton(self):
-        print "hello"
+        if self.importing == True:
+            return
+        
+        self.importing = True
         importWindow = importGui.Ui_Import()
         importWindow.setText("Importing From: " + "...")
         importWindow.show()
@@ -128,11 +132,12 @@ class control(object):
         importWindow.setText("Importing From: " + fileName)
         
         i = 0
-        while i < 100000:
+        while i <= 100000:
             importWindow.setProgress(i/1000)
             i = i+1
             print i/1000
             
+        self.importing = False
 
 
 if __name__ == "__main__":

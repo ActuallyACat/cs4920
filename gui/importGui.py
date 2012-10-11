@@ -45,6 +45,7 @@ class Ui_Import(QtGui.QDialog):
         self.verticalLayout.addItem(spacerItem2)
 
         self.retranslateUi()
+        QtCore.QObject.connect(self.closeButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.close())
         QtCore.QMetaObject.connectSlotsByName(self)
         self.setProgress(0)
 
@@ -56,6 +57,8 @@ class Ui_Import(QtGui.QDialog):
         self.progressBar.setProperty("value", value)
         if value < 100:
             self.closeButton.setDisabled(True)
+        else:
+            self.closeButton.setEnabled(True)
             
     def setText(self, text):
         self.Description.setText(_fromUtf8(text))

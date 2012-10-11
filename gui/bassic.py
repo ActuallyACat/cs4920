@@ -183,7 +183,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.searchButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("search button"))
         QtCore.QObject.connect(self.searchButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.search(self.searchInput.text()))
         QtCore.QObject.connect(self.searchInput, QtCore.SIGNAL(_fromUtf8("returnPressed()")), lambda: self.control.search(self.searchInput.text()))
-        QtCore.QObject.connect(self.exportButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("export button"))
+        QtCore.QObject.connect(self.exportButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.export())
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.control.lookUpMode("")

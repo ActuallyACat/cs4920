@@ -16,6 +16,7 @@ except AttributeError:
 
 class Ui_UEarea(object):
     def setupUi(self, UEarea):
+        self.ue = []
         UEarea.setObjectName(_fromUtf8("UEarea"))
         UEarea.resize(609, 531)
         self.verticalLayout_7 = QtGui.QVBoxLayout(UEarea)
@@ -28,68 +29,96 @@ class Ui_UEarea(object):
         self.scrollAreaUEWidgetContents.setObjectName(_fromUtf8("scrollAreaUEWidgetContents"))
         self.verticalLayout_4 = QtGui.QVBoxLayout(self.scrollAreaUEWidgetContents)
         self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
-        self.usageExample = QtGui.QWidget(self.scrollAreaUEWidgetContents)
-        self.usageExample.setObjectName(_fromUtf8("usageExample"))
-        self.horizontalLayout_8 = QtGui.QHBoxLayout(self.usageExample)
-        self.horizontalLayout_8.setMargin(0)
-        self.horizontalLayout_8.setObjectName(_fromUtf8("horizontalLayout_8"))
-        self.uepart1 = QtGui.QLabel(self.usageExample)
-        self.uepart1.setObjectName(_fromUtf8("uepart1"))
-        self.horizontalLayout_8.addWidget(self.uepart1)
-        self.uepart2 = QtGui.QLabel(self.usageExample)
-        self.uepart2.setObjectName(_fromUtf8("uepart2"))
-        self.horizontalLayout_8.addWidget(self.uepart2)
-        self.uepart3 = QtGui.QLabel(self.usageExample)
-        self.uepart3.setObjectName(_fromUtf8("uepart3"))
-        self.horizontalLayout_8.addWidget(self.uepart3)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem)
-        self.verticalLayout_4.addWidget(self.usageExample)
-        self.usageExample_line = QtGui.QFrame(self.scrollAreaUEWidgetContents)
-        self.usageExample_line.setFrameShape(QtGui.QFrame.HLine)
-        self.usageExample_line.setFrameShadow(QtGui.QFrame.Sunken)
-        self.usageExample_line.setObjectName(_fromUtf8("usageExample_line"))
-        self.verticalLayout_4.addWidget(self.usageExample_line)
-        self.usageExample_2 = QtGui.QWidget(self.scrollAreaUEWidgetContents)
-        self.usageExample_2.setObjectName(_fromUtf8("usageExample_2"))
-        self.horizontalLayout_10 = QtGui.QHBoxLayout(self.usageExample_2)
-        self.horizontalLayout_10.setMargin(0)
-        self.horizontalLayout_10.setObjectName(_fromUtf8("horizontalLayout_10"))
-        self.uepart1_2 = QtGui.QLabel(self.usageExample_2)
-        self.uepart1_2.setObjectName(_fromUtf8("uepart1_2"))
-        self.horizontalLayout_10.addWidget(self.uepart1_2)
-        self.uepart2_2 = QtGui.QLabel(self.usageExample_2)
-        self.uepart2_2.setObjectName(_fromUtf8("uepart2_2"))
-        self.horizontalLayout_10.addWidget(self.uepart2_2)
-        self.uepart3_2 = QtGui.QLabel(self.usageExample_2)
-        self.uepart3_2.setObjectName(_fromUtf8("uepart3_2"))
-        self.horizontalLayout_10.addWidget(self.uepart3_2)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_10.addItem(spacerItem1)
-        self.verticalLayout_4.addWidget(self.usageExample_2)
-        self.usageExample_line_2 = QtGui.QFrame(self.scrollAreaUEWidgetContents)
-        self.usageExample_line_2.setFrameShape(QtGui.QFrame.HLine)
-        self.usageExample_line_2.setFrameShadow(QtGui.QFrame.Sunken)
-        self.usageExample_line_2.setObjectName(_fromUtf8("usageExample_line_2"))
-        self.verticalLayout_4.addWidget(self.usageExample_line_2)
+        
+        
+        
         spacerItem2 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem2)
         self.scrollAreaUE.setWidget(self.scrollAreaUEWidgetContents)
         self.verticalLayout_7.addWidget(self.scrollAreaUE)
+        
+        # loop and add
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+        self.addEntry("", "")
+
 
         self.retranslateUi(UEarea)
         QtCore.QMetaObject.connectSlotsByName(UEarea)
 
     def retranslateUi(self, UEarea):
         UEarea.setWindowTitle(QtGui.QApplication.translate("UEarea", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.uepart1.setText(QtGui.QApplication.translate("UEarea", "part1", None, QtGui.QApplication.UnicodeUTF8))
-        self.uepart2.setText(QtGui.QApplication.translate("UEarea", "part2", None, QtGui.QApplication.UnicodeUTF8))
-        self.uepart3.setText(QtGui.QApplication.translate("UEarea", "part3", None, QtGui.QApplication.UnicodeUTF8))
-        self.uepart1_2.setText(QtGui.QApplication.translate("UEarea", "part1", None, QtGui.QApplication.UnicodeUTF8))
-        self.uepart2_2.setText(QtGui.QApplication.translate("UEarea", "part2", None, QtGui.QApplication.UnicodeUTF8))
-        self.uepart3_2.setText(QtGui.QApplication.translate("UEarea", "part3", None, QtGui.QApplication.UnicodeUTF8))
+        
+    def addEntry(self, label, meaning):
+        #usage example1
+        usageExample = Ui_usageExampleSgl(self.scrollAreaUEWidgetContents)
+        usageExample.setObjectName(_fromUtf8("usageExample"))
+        
+        self.verticalLayout_4.addWidget(usageExample)
+        self.ue.append(usageExample)
+        
+        
+        
+class Ui_usageExampleSgl(QtGui.QWidget):
+    def __init__(self, parent):
+        super(Ui_usageExampleSgl, self).__init__(parent)
+        self.setupUi()
+        
+    def setupUi(self):
+        
+        #self.setAcceptDrops(True)
+        
+        #self.setDragEnabled(True)
+        
+        self.setObjectName(_fromUtf8("usageExample"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.words = []
+        #for part in self.words:
+        self.uepart1 = QtGui.QLabel(self)
+        self.uepart1.setObjectName(_fromUtf8("uepart1"))
+        self.horizontalLayout.addWidget(self.uepart1)
+        
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
 
+        self.retranslateUi(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
 
+    def retranslateUi(self, usageExample):
+        usageExample.setWindowTitle(QtGui.QApplication.translate("usageExample", "Form", None, QtGui.QApplication.UnicodeUTF8))
+        self.uepart1.setText(QtGui.QApplication.translate("usageExample", "part1", None, QtGui.QApplication.UnicodeUTF8))
+
+    def dragEnterEvent(self, e):
+      
+        if e.mimeData().hasFormat('text/plain'):
+            e.accept()
+        else:
+            e.ignore() 
+
+    def dropEvent(self, e):
+        print e.mimeData().text()
+        
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)

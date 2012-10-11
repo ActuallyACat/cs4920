@@ -36,9 +36,10 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         QtCore.QMetaObject.connectSlotsByName(self)
         
         self.addSentence("tets", "tes", "0.67")
-        self.addSentence("tets", "tesewfewfewg", "0.67")
+        self.addSentence("tets", "tesewfewfewg", "")
         self.addSentence("trsgrsets", "errggergrsges", "0.67")
         self.addSentence("trggets", "trggrgsrgsrgrgrggres", "0.67")
+        self.clearSentences()
 
 
     def addSentence(self, meaning, translation, score):
@@ -85,22 +86,22 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         temp.example1translation.setObjectName(_fromUtf8("example1translation"))
         temp.verticalLayout.addWidget(temp.example1translation)
         temp.horizontalLayout.addWidget(temp.widget)
+        
         temp.spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         temp.horizontalLayout.addItem(temp.spacerItem)
 
-        temp.line_3 = QtGui.QFrame(self.scrollAreaWidgetContents_3)
-        temp.line_3.setFrameShape(QtGui.QFrame.HLine)
-        temp.line_3.setFrameShadow(QtGui.QFrame.Sunken)
-        temp.line_3.setObjectName(_fromUtf8("line_3"))
+        temp.line = QtGui.QFrame(self.scrollAreaWidgetContents_3)
+        temp.line.setFrameShape(QtGui.QFrame.HLine)
+        temp.line.setFrameShadow(QtGui.QFrame.Sunken)
+        temp.line.setObjectName(_fromUtf8("line"))
+        temp.verticalLayout.addWidget(temp.line)
         
         temp.label_2.setText(_fromUtf8(score))
         temp.example1sentence.setText(_fromUtf8(meaning))
         temp.example1translation.setText(_fromUtf8(translation))
         
         self.verticalLayout_5.addWidget(temp)
-        self.verticalLayout_5.addWidget(temp.line_3)
         self.sentences.append(temp)
-        self.sentences.append(temp.line_3)
         
         self.verticalLayout_5.addItem(self.spacerItem)
         

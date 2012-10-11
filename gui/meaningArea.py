@@ -48,14 +48,15 @@ class Ui_meaningArea(QtGui.QWidget):
         meaningEntry.meaningLabel.setText(_fromUtf8(translation))
         
         QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("meaning button pressed = " + meaningEntry.meaningButton.text()))
-        QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.wordMeanings(meaningEntry.meaningButton.text()))
+        QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.wordMeanings(meaningEntry.meaningButton.text(), ))
         
         QtCore.QMetaObject.connectSlotsByName(meaningEntry)
 
 
     def clearMeanings(self):
         for meaning in self.meanings:
-            meaning.destroy
+            meaning.hide()
+            meaning.destroy()
             self.meanings.remove(meaning)
 
 

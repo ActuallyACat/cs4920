@@ -79,6 +79,5 @@ class control(object):
             
     def wordMeanings(self, str):
         print "button has been clicked linked to \"" +str+ "\" meaning"
-        
         self.gui.DictionaryWordsScrollArea.show()
     

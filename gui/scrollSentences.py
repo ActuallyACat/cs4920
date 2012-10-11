@@ -18,16 +18,16 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         self.setupUi()
         
     def setupUi(self):
-        #self.setGeometry(QtCore.QRect(20, 60, 350, 178))
+        self.setGeometry(QtCore.QRect(20, 60, 350, 178))
         self.setWidgetResizable(True)
         self.setObjectName(_fromUtf8("DictionaryWordsScrollArea"))
         self.scrollAreaWidgetContents_3 = QtGui.QWidget()
-        #self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 332, 307))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 332, 307))
         self.scrollAreaWidgetContents_3.setObjectName(_fromUtf8("scrollAreaWidgetContents_3"))
         self.verticalLayout_5 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
-        
         self.sentences = []
+        
         
         self.spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(self.spacerItem)
@@ -114,6 +114,8 @@ class Ui_ScrollArea(QtGui.QScrollArea):
             sentence = self.sentences.pop()
             sentence.hide()
             sentence.destroy()
+            
+        
             
     def getSentences(self):
         temp = []

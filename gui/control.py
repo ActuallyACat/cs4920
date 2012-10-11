@@ -122,8 +122,11 @@ class control(object):
     def importButton(self):
         print "hello"
         importWindow = importGui.Ui_Import()
-        importWindow.setText("Importing From: " + "here")
+        importWindow.setText("Importing From: " + "...")
         importWindow.show()
+        fileName = importWindow.getFile()
+        importWindow.setText("Importing From: " + fileName)
+        
         i = 0
         while i < 100000:
             importWindow.setProgress(i/1000)

@@ -26,7 +26,7 @@ class Ui_meaningArea(QtGui.QWidget):
         self.meanings = []
         
         
-    def addMeaning(self, meaning, translation):
+    def addEntry(self, meaning, translation):
         
         meaningEntry = QtGui.QWidget(self)
         meaningEntry.setObjectName(_fromUtf8("meaningEntry"))
@@ -42,8 +42,8 @@ class Ui_meaningArea(QtGui.QWidget):
         self.verticalLayout.addWidget(meaningEntry)
         self.meanings.append(meaningEntry)
         
-        meaningEntry.meaningButton.setText(meaning)
-        meaningEntry.meaningLabel.setText(translation)
+        meaningEntry.meaningButton.setText(_fromUtf8(meaning))
+        meaningEntry.meaningLabel.setText(_fromUtf8(translation))
         
         QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("meaning button pressed = " + meaningEntry.meaningButton.text()))
         QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.wordMeanings(meaningEntry.meaningButton.text()))

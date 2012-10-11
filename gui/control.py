@@ -39,6 +39,7 @@ class control(object):
         if (self.mode == "dictionary"):
             if (str):
                 list_of_entries = dictionary_mode_search(str)
+                self.gui.dictionaryWords.addEntry(dictionary_mode_search(str).__str__(), "blah")
                 #print list_of_entries
                 self.gui.dictionaryWords.clearMeanings()
                 for entry in list_of_entries:

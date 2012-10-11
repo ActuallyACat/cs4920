@@ -33,7 +33,8 @@ class control(object):
         
     def test(self, str):
         
-        print str
+        pass
+        #print str
         
     def search(self, str):
         print "a search for \"" + str + "\" was conducted"
@@ -55,7 +56,7 @@ class control(object):
 
                     for meaning in entry.meanings:
                         self.gui.dictionaryWords.addMeaning(
-                                button_text, meaning.meaning)
+                                button_text, meaning.meaning, meaning)
                 self.gui.dictionary_2.show()
                 self.gui.DictionaryWordsScrollArea.hide()
                 
@@ -77,7 +78,13 @@ class control(object):
         self.gui.UEarea.hide()
         self.search(str)
             
-    def wordMeanings(self, str):
-        print "button has been clicked linked to \"" +str+ "\" meaning"
+
+    def wordMeanings(self, str, meaning):
+        #print "button has been clicked linked to \"" +str+ "\" meaning"
+        print meaning
+        self.gui.DictionaryWordsScrollArea.clearSentences()
+        for ue in meaning.usage_examples:
+            self.gui.DictionaryWordsScrollArea.addSentence(ue.expression, ue.meaning, 9.99)
+        
         self.gui.DictionaryWordsScrollArea.show()
     

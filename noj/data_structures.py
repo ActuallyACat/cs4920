@@ -43,6 +43,10 @@ class DictionaryEntry(object):
         """docstring for num_meanings"""
         return len(self.meanings)
     
+    def kanji_string(self):
+        """Return a string containing kanji separated by a dot"""
+        return u"・".join(self.kanji)
+    
     def __str__(self):
         meaning_str_list = list()
         for m in self.meanings:

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 '''
 Created on 08/10/2012
 
@@ -38,9 +40,22 @@ class control(object):
         
         if (self.mode == "dictionary"):
             if (str):
-                print dictionary_mode_search(str)
-                
-                self.gui.dictionaryWords.addEntry(dictionary_mode_search(str).__str__(), "blah")
+                list_of_entries = dictionary_mode_search(str)
+                #self.gui.dictionaryWords.addEntry(dictionary_mode_search(str).__str__(), "blah")
+                #print list_of_entries
+                self.gui.dictionaryWords.clearMeanings()
+                for entry in list_of_entries:
+                    print entry
+                    if entry.kanji != [u'']:
+                        button_text = u"{} [{}]".format(entry.kana, 
+                                entry.kanji_string())
+                        print "kanji=".format(repr(entry.kanji))
+                    else:
+                        button_text = u"{}".format(entry.kana)
+
+                    for meaning in entry.meanings:
+                        self.gui.dictionaryWords.addMeaning(
+                                button_text, meaning.meaning)
                 self.gui.dictionary_2.show()
                 self.gui.DictionaryWordsScrollArea.hide()
                 

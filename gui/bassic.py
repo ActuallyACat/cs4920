@@ -107,9 +107,8 @@ class Ui_MainWindow(object):
         self.searchButton.setObjectName(_fromUtf8("searchButton"))
         self.horizontalLayout_3.addWidget(self.searchButton)
         self.verticalLayout_10.addWidget(self.searchArea)
-        self.UEarea = QtGui.QWidget(self.rightPane)
+        self.UEarea = scrollSentences.Ui_ScrollArea(self.rightPane)
         self.UEarea.setObjectName(_fromUtf8("UEarea"))
-        ue.Ui_UEarea().setupUi(self.UEarea)
         self.verticalLayout_10.addWidget(self.UEarea)
 
         

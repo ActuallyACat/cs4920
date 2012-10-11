@@ -14,56 +14,48 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Ui_meaningArea(object):
-    def setupUi(self, control, meaningArea):
-        meaningArea.setObjectName(_fromUtf8("meaningArea"))
-        meaningArea.resize(400, 300)
+class Ui_meaningArea(QtGui.QWidget):
+    def __init__(self, parent, control):
+        super(Ui_meaningArea, self).__init__(parent)
+        self.setupUi(control)
+        
+    def setupUi(self, control):
         self.control = control
-        self.verticalLayout = QtGui.QVBoxLayout(meaningArea)
+        self.verticalLayout = QtGui.QVBoxLayout(self)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.meaningEntry = QtGui.QWidget(meaningArea)
-        self.meaningEntry.setObjectName(_fromUtf8("meaningEntry"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.meaningEntry)
-        self.horizontalLayout_2.setMargin(0)
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.meaningButton = QtGui.QPushButton(self.meaningEntry)
-        self.meaningButton.setObjectName(_fromUtf8("meaningButton"))
-        self.horizontalLayout_2.addWidget(self.meaningButton)
-        self.meaningLabel = QtGui.QLabel(self.meaningEntry)
-        self.meaningLabel.setObjectName(_fromUtf8("meaningLabel"))
-        self.horizontalLayout_2.addWidget(self.meaningLabel)
-        self.verticalLayout.addWidget(self.meaningEntry)
-        self.meaningEntry_2 = QtGui.QWidget(meaningArea)
-        self.meaningEntry_2.setObjectName(_fromUtf8("meaningEntry_2"))
-        self.horizontalLayout_3 = QtGui.QHBoxLayout(self.meaningEntry_2)
-        self.horizontalLayout_3.setMargin(0)
-        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        self.meaningButton_2 = QtGui.QPushButton(self.meaningEntry_2)
-        self.meaningButton_2.setObjectName(_fromUtf8("meaningButton_2"))
-        self.horizontalLayout_3.addWidget(self.meaningButton_2)
-        self.meaningLabel_2 = QtGui.QLabel(self.meaningEntry_2)
-        self.meaningLabel_2.setObjectName(_fromUtf8("meaningLabel_2"))
-        self.horizontalLayout_3.addWidget(self.meaningLabel_2)
-        self.verticalLayout.addWidget(self.meaningEntry_2)
-
-        self.retranslateUi(meaningArea)
+        self.meanings = []
         
-        QtCore.QObject.connect(self.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("meaning button1"))
-        QtCore.QObject.connect(self.meaningButton_2, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("meaning button2"))
         
-        QtCore.QObject.connect(self.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.wordMeanings("word meaning id"))
-        QtCore.QObject.connect(self.meaningButton_2, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.wordMeanings("word meaning id"))
-
+    def addMeaning(self, meaning, translation):
         
-        QtCore.QMetaObject.connectSlotsByName(meaningArea)
+        meaningEntry = QtGui.QWidget(self)
+        meaningEntry.setObjectName(_fromUtf8("meaningEntry"))
+        meaningEntry.horizontalLayout_2 = QtGui.QHBoxLayout(meaningEntry)
+        meaningEntry.horizontalLayout_2.setMargin(0)
+        meaningEntry.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        meaningEntry.meaningButton = QtGui.QPushButton(meaningEntry)
+        meaningEntry.meaningButton.setObjectName(_fromUtf8("meaningButton"))
+        meaningEntry.horizontalLayout_2.addWidget(meaningEntry.meaningButton)
+        meaningEntry.meaningLabel = QtGui.QLabel(meaningEntry)
+        meaningEntry.meaningLabel.setObjectName(_fromUtf8("meaningLabel"))
+        meaningEntry.horizontalLayout_2.addWidget(meaningEntry.meaningLabel)
+        self.verticalLayout.addWidget(meaningEntry)
+        self.meanings.append(meaningEntry)
+        
+        meaningEntry.meaningButton.setText(meaning)
+        meaningEntry.meaningLabel.setText(translation)
+        meaningEntry.de
+        
+        QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("meaning button pressed = " + meaningEntry.meaningButton.text()))
+        QtCore.QObject.connect(meaningEntry.meaningButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.wordMeanings(meaningEntry.meaningButton.text()))
+        
+        QtCore.QMetaObject.connectSlotsByName(meaningEntry)
 
-    def retranslateUi(self, meaningArea):
-        meaningArea.setWindowTitle(QtGui.QApplication.translate("meaningArea", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.meaningButton.setText(QtGui.QApplication.translate("meaningArea", "先生", None, QtGui.QApplication.UnicodeUTF8))
-        self.meaningLabel.setText(QtGui.QApplication.translate("meaningArea", "teacher; master; doctor;", None, QtGui.QApplication.UnicodeUTF8))
-        self.meaningButton_2.setText(QtGui.QApplication.translate("meaningArea", "先生", None, QtGui.QApplication.UnicodeUTF8))
-        self.meaningLabel_2.setText(QtGui.QApplication.translate("meaningArea", "teacher; master; doctor;", None, QtGui.QApplication.UnicodeUTF8))
 
+    def clearMeanings(self):
+        for meaning in self.meanings:
+            meaning.destroy
+            self.meanings.remove(meaning)
 
 if __name__ == "__main__":
     import sys

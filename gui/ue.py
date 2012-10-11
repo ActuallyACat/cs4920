@@ -73,7 +73,7 @@ class Ui_UEarea(object):
         #usage example1
         usageExample = Ui_usageExampleSgl(self.scrollAreaUEWidgetContents)
         usageExample.setObjectName(_fromUtf8("usageExample"))
-        usageExample.addElement(label)
+        usageExample.addElement(label, meaning)
         
         self.verticalLayout_4.addWidget(usageExample)
         self.ue.append(usageExample)
@@ -94,24 +94,16 @@ class Ui_usageExampleSgl(QtGui.QWidget):
         self.setObjectName(_fromUtf8("usageExample"))
         self.horizontalLayout = QtGui.QHBoxLayout(self)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.words = []
-        self.parts = []
-        for part in self.words:
-            temp = QtGui.QLabel(self)
-            temp.setObjectName(part)
-            temp.setText(part)
-            self.horizontalLayout.addWidget(temp)
-            self.parts.append(temp)
-        
+        self.parts = []        
         self.spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(self.spacerItem)
 
         QtCore.QMetaObject.connectSlotsByName(self)
         
-    def addElement(self, text):
+    def addElement(self, label, meaning):
         temp = QtGui.QLabel(self)
-        temp.setObjectName(text)
-        temp.setText(text)
+        temp.setObjectName(label)
+        temp.setText(label)
         self.horizontalLayout.addWidget(temp)
         self.parts.append(temp)
         self.horizontalLayout.removeItem(self.spacerItem)

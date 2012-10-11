@@ -118,12 +118,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.dictionary_2)
         self.verticalLayout_2.setMargin(0)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.dictionaryWords = QtGui.QWidget(self.dictionary_2)
+        
+        #this stores dictionary words
+        self.dictionaryWords = meaningArea.Ui_meaningArea(self.dictionary_2, self.control)
         self.dictionaryWords.setMinimumSize(QtCore.QSize(100, 100))
         self.dictionaryWords.setObjectName(_fromUtf8("dictionaryWords"))
-        
-        meaningArea.Ui_meaningArea().setupUi(self.control, self.dictionaryWords)
-        
         self.verticalLayout_2.addWidget(self.dictionaryWords)
         self.DictionaryWordsScrollArea = QtGui.QScrollArea(self.dictionary_2)
         self.DictionaryWordsScrollArea.setWidgetResizable(True)

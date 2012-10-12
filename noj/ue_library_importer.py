@@ -21,8 +21,15 @@ re_ue_split = re.compile(r'^\t\t([^\t]*)\t([^\t]*)\n')
 
 class LibraryImporter(object):
     """docstring for LibraryImporter"""
-    def __init__(self):
+    def __init__(self, path, dbi):
         super(LibraryImporter, self).__init__()
+        self.path = path # eg. path to epwing dict
+        self.converted_path = None 
+        #self.db_path = None 
+        self.dbi = dbi
+
+    #def set_db_path(self, db_path):
+        #self.db_path = db_path
 
     def set_library(self, library_code):
         """docstring for set_library"""
@@ -31,32 +38,39 @@ class LibraryImporter(object):
     def prepare_library(self):
         """docstring for prepare"""
         if self.library_code == 'WADAI5':
-            dumper = Kenkyusha5Dumper('kenkyusha')
+            dumper = Kenkyusha5Dumper(self.path)
             dumper.dump('kenkyusha_dump')
             dump_converter = Kenkyusha5DumpConverter('kenkyusha_dump')
-            dump_converter.convert('kenkyusha_converted')
+            self.converted_path = 'kenkyusha_converted'
+            dump_converter.convert(self.converted_path)
     
     def import_progress(self):
         """docstring for import_progress"""
         progress = ProgressPoint(1, 2, 0, 1)
         yield progress
         self.prepare_library()
-        dbi = DatabaseInterface('sentence_library2.db')
-        dbi.reset_database()
-        importer = UELibraryImporter('out2')
+        #dbi = DatabaseInterface(self.db_path)
+        self.dbi.reset_database()
+        importer = UELibraryImporter(self.converted_path)
         parser = JapaneseParser()
         lib_type = importer.type_
-        lib_id = dbi.get_or_create_library_id('Kenkyusha 5th', 1)
-        print lib_id
-        total_num_entries = num_entries('out2')
+        if self.library_code == 'WADAI5':
+            lib_id = self.dbi.get_or_create_library_id('Kenkyusha 5th', 1)
+        total_num_entries = self.num_entries(self.converted_path)
         progress = ProgressPoint(2, 2, 0, total_num_entries)
         for idx, entry in enumerate(importer.entries()):
-            #print entry
             progress.point = idx
-            dbi.import_entry_recursive(entry, lib_id, parser)
-            #yield idx
+            self.dbi.import_entry_recursive(entry, lib_id, parser)
             yield progress
-        dbi.commit()
+        self.dbi.commit()
+
+    def num_entries(self, fname):
+        num_entries = 0
+        with open(fname) as fh:
+            for line in fh:
+                if re_entry.match(line):
+                    num_entries += 1
+        return num_entries
 
 class UELibraryImporter(object):
     """Imports usage example libraries"""
@@ -134,28 +148,21 @@ class UELibraryImporter(object):
             yield entry
             entry = self.read_entry()
 
-def import_library():
-    """docstring for import_library"""
-    dbi = DatabaseInterface('sentence_library2.db')
-    dbi.reset_database()
-    importer = UELibraryImporter('out2')
-    parser = JapaneseParser()
-    lib_type = importer.type_
-    lib_id = dbi.get_or_create_library_id('Kenkyusha 5th', 1)
-    print lib_id
-    for idx, entry in enumerate(importer.entries()):
-        print entry
-        dbi.import_entry_recursive(entry, lib_id, parser)
-        print idx
-    dbi.commit()
+#def import_library():
+    #"""docstring for import_library"""
+    #dbi = DatabaseInterface('sentence_library2.db')
+    #dbi.reset_database()
+    #importer = UELibraryImporter('out2')
+    #parser = JapaneseParser()
+    #lib_type = importer.type_
+    #lib_id = dbi.get_or_create_library_id('Kenkyusha 5th', 1)
+    #print lib_id
+    #for idx, entry in enumerate(importer.entries()):
+        #print entry
+        #dbi.import_entry_recursive(entry, lib_id, parser)
+        #print idx
+    #dbi.commit()
 
-def num_entries(fname):
-    num_entries = 0
-    with open(fname) as fh:
-        for line in fh:
-            if re_entry.match(line):
-                num_entries += 1
-    return num_entries
 
 
 #def import_progress():
@@ -200,7 +207,9 @@ def main():
     #import_library()
     #for progress in import_progress():
         #print progress
-    importer = LibraryImporter()
+    dbi = DatabaseInterface('sentence_library3.db')
+    importer = LibraryImporter('kenkyusha', dbi)
+    #importer.set_db_path('sentence_library3.db')
     importer.set_library('WADAI5')
     #importer.prepare_library()
     for progress in importer.import_progress():

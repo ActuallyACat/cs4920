@@ -91,19 +91,13 @@ class control(object):
             
     def lookUpMode(self, str):
         self.mode = "lookUp"
-        self.gui.UEarea.show()
-        self.gui.dictionary_2.hide()
-        self.gui.pushButtonLookUp.setDisabled(True)
-        self.gui.pushButtonDictionary.setEnabled(True)
         self.search(str)
+        self.gui.listMode()
         
     def dictionaryMode(self, str):
         self.mode = "dictionary"
-        self.gui.dictionary_2.show()
-        self.gui.UEarea.hide()
-        self.gui.pushButtonDictionary.setDisabled(True)
-        self.gui.pushButtonLookUp.setEnabled(True)
         self.search(str)
+        self.gui.dictionaryMode()
             
 
     def wordMeanings(self, str, meaning):
@@ -114,6 +108,7 @@ class control(object):
             self.gui.DictionaryWordsScrollArea.addSentence(ue.expression, ue.meaning, 9.99, ue)
         
         self.gui.DictionaryWordsScrollArea.show()
+        self.gui.dictionaryModeList()
 
     def export(self):
         print "export button was pressed"
@@ -132,6 +127,7 @@ class control(object):
         importWindow = importGui.Ui_Import()
         importWindow.setText("Importing From: " + "...")
         importWindow.show()
+        
         fileName = importWindow.getFile()
         importWindow.setText("Importing From: " + fileName)
 

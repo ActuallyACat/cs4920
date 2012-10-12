@@ -18,6 +18,8 @@ class DatabaseInterface(object):
         self.open_()
 
     def open_(self):
+    """Opens connection to database
+	"""
         self.con = lite.connect(self.db_path)
         self.cur = self.con.cursor()
         print("Connection Established")    
@@ -26,10 +28,13 @@ class DatabaseInterface(object):
         self.con.commit()
 
     def close(self):
+	"""Closes connection to database
+	"""
         self.con.close()
 
     def reset_database(self):
-        """Delete the DB and reload the schema."""
+        """Delete the DB and reload the schema.
+		"""
         self.close()
         try:
             os.remove(self.db_path)
@@ -160,7 +165,9 @@ class DatabaseInterface(object):
 
 
     def get_lib_type_id(self, type_name):
-        """docstring for get_lib_type_id"""
+        """docstring for get_lib_type_id
+		
+		Returns the type for library"""
         if type_name not in self.lib_type_ids:
             try:
                 con = lite.connect(self.db_path)
@@ -178,6 +185,10 @@ class DatabaseInterface(object):
         return self.lib_type_ids[type_name]
 
     def import_UE(self,UsageExample,Meaning):
+		"""docstring for import_UE
+		
+		imports usages examples into the DB
+		"""
         try:
             con = lite.connect(self.db_path)
             with con:
@@ -190,6 +201,12 @@ class DatabaseInterface(object):
             sys.exit(1)
  
     def searchUE_Dictionary(self,entry):
+		"""docstring for searchUE_Dictionary
+		
+		searches for the dictionary meaning for associated usage example through DB
+		
+		returns -> meanings, entries and entry IDs
+		"""
         try:
             con = lite.connect(self.db_path)
             with con:
@@ -207,6 +224,12 @@ class DatabaseInterface(object):
  
                 
     def searchUE_lookup(self,morpheme):
+		"""docstring for searchUE_lookup
+		
+		searches for usage examples from a word
+		
+		returns -> meanings, entries, usage examples, morphemes and morpheme IDs
+		"""
         try:
             con = lite.connect(self.db_path)
             with con:

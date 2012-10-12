@@ -33,8 +33,8 @@ class Ui_meaningArea(QtGui.QWidget):
         
         
     def addMeaning(self, meaning, translation, meaning_object):
-    """ meanings is a button you can select for UE to be populated.
-    """
+        """ meanings is a button you can select for UE to be populated.
+        """
         meaningEntry = QtGui.QWidget(self)
         meaningEntry.setObjectName(_fromUtf8("meaningEntry"))
         meaningEntry.horizontalLayout_2 = QtGui.QHBoxLayout(meaningEntry)
@@ -61,7 +61,7 @@ class Ui_meaningArea(QtGui.QWidget):
 
 
     def clearMeanings(self):
-    """ deletes meanings and then hides and destroys the object """
+        """ deletes meanings and then hides and destroys the object """
         for meaning in self.meanings:
             meaning.hide()
             meaning.destroy()

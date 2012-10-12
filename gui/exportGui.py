@@ -6,7 +6,9 @@ Created on 12/10/2012
 from PyQt4 import QtCore, QtGui
 
 class Ui_Export(QtGui.QDialog):
-
+"""docstring for Ui_Export
+Exports usage example list
+"""
     def __init__(self):
         super(Ui_Export, self).__init__()
         

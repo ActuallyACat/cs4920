@@ -9,6 +9,7 @@ import bassic, importGui, exportGui
 from noj.db_interface import *
 from noj.data_structures import *
 from noj.ue_exporter import *
+from noj.ue_library_importer import *
 from backend_stubs import *
 
 class control(object):
@@ -133,10 +134,15 @@ class control(object):
         importWindow.show()
         fileName = importWindow.getFile()
         importWindow.setText("Importing From: " + fileName)
+
+        importer = LibraryImporter(fileName)
+        importer.set_db_path('../sentence_library.db')
+        importer.set_library('WADAI5')
         
         i = 0
         while i <= 100000:
             importWindow.setProgress(i/1000)
+            importWindow.show()
             i = i+1
             print i/1000
             

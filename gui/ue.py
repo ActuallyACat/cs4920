@@ -15,6 +15,9 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class Ui_UEarea(object):
+    """ Ui_UEarea is a box where a list of UEs can be displayed. 
+        It has a scrollbar for the user to scroll down a long list.
+    """
     def setupUi(self, UEarea):
         self.ue = []
         UEarea.setObjectName(_fromUtf8("UEarea"))
@@ -70,6 +73,7 @@ class Ui_UEarea(object):
         UEarea.setWindowTitle(QtGui.QApplication.translate("UEarea", "Form", None, QtGui.QApplication.UnicodeUTF8))
         
     def addEntry(self, label, meaning):
+        """docstring addEntry - used to add usage examples"""
         #usage example1
         usageExample = Ui_usageExampleSgl(self.scrollAreaUEWidgetContents)
         usageExample.setObjectName(_fromUtf8("usageExample"))

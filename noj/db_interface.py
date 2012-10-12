@@ -4,6 +4,8 @@
 import sqlite3 as lite
 import sys
 import os
+#from noj.data_structures import *
+import noj.data_structures
 
 SCHEMA_PATH = '../schema.sql'
 
@@ -325,4 +327,87 @@ class DatabaseInterface(object):
             print "Error %s:" % e.args[0]
             sys.exit(1)
             
-    
+    def lookup_mode_search(self, string):
+        lists = list() #create empty list
+        con = lite.connect(self.db_path)
+        with con:
+            cur = con.cursor()
+            #Returns id, expression, meaning, reading, isSentence
+            cur.execute("SELECT * FROM usageExamples WHERE id IN " +
+                            "(SELECT usageExample FROM UEConsistsOf WHERE morpheme IN "+
+                                "(SELECT id FROM morphemes WHERE morpheme=?)"+
+                            ")", [string]);
+            rows = cur.fetchall()
+            i = 0
+            for row in rows:
+                #Create list of usageExamples
+                #create new usage example
+                ue = noj.data_structures.UsageExample(row[1], row[2], row[3])
+                #print ue
+                lists.append(ue)
+                i += 1
+        return lists
+
+    def dict_mode_search(self, string): 
+        """
+        #string is the morpheme
+        TODO: Returns a list of DictionaryEntry entries (from data_structures.py)
+        """
+        entries = list()
+        con = lite.connect(self.db_path)
+        with con:
+            cur1 = con.cursor()    
+            cur1.execute("""
+select ehk.entry from entryhaskanji ehk, morphemes m where m.morphemetype = 14 and ehk.kanji = m.id and m.morpheme=?
+UNION
+select e.id from entries e join morphemes m on e.kana = m.id where m.morpheme=?;
+""", (string, string))
+            rows1 = cur1.fetchall()    
+            for row in rows1:
+                entry_id = row[0]
+                print entry_id
+                cur1.execute("""
+select e.id, e.number, k.morpheme, k2.morpheme from entries e join morphemes k on k.id = e.kana left outer join entryhaskanji ehk on ehk.entry = e.id left outer join morphemes k2 on k2.id = ehk.kanji where e.id = ?;
+""", [entry_id])
+                entry_rows = cur1.fetchall()
+                kanji = list()
+                for entry_row in entry_rows:
+                    print entry_row
+                    single_kanji = entry_row[3]
+                    if single_kanji is None:
+                        single_kanji = ''
+                    kanji.append(single_kanji)
+                    kana = entry_row[2]
+                    entry_number = entry_row[1]
+                entries.append(noj.data_structures.DictionaryEntry(kana, kanji, entry_number, id_=entry_id))
+            return entries
+
+
+    def get_meanings(self, entry_id):
+        """Returns list of DictionaryMeaning for given entry id. """
+        meanings = list()
+        self.cur.execute("select id, meaning from Meanings where entry = ?", [entry_id])
+        rows = self.cur.fetchall()    
+        for idx, m in enumerate(rows):
+            meanings.append(noj.data_structures.DictionaryMeaning(m[1], idx+1, m[0]))
+        return meanings
+
+    def get_usage_examples(self, meaning_id):
+        """Returns list of UsageExample for given entry id. """
+        usage_examples = list()
+        self.cur.execute("select ue.id, ue.expression, ue.meaning from usageexamples ue join meaninghasues mhu on mhu.usageexample = ue.id where mhu.meaning = ?", [meaning_id])
+        rows = self.cur.fetchall()    
+        for idx, ue in enumerate(rows):
+            usage_examples.append(noj.data_structures.UsageExample(ue[1], ue[2]))
+        return usage_examples
+
+if __name__ == '__main__':
+    dbi = DatabaseInterface('sentence_library.db')
+    #print dbi.lookup_mode_search(u'才能')
+    #print dbi.lookup_mode_search(u'先生')
+    #dbi.dict_mode_search(u'先生')
+    #dbi.dict_mode_search(u'ああ')
+    entries = dbi.dict_mode_search(u'まち')
+    for e in entries:
+        print e
+        e.get_meanings(dbi)

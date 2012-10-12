@@ -62,7 +62,7 @@ class control(object):
         pass
         #print str
         
-    def search(self, str):
+    def search(self, string):
 	"""docstring for search
 		
 		Search has 2 different functions: lookup and dictionary
@@ -70,11 +70,12 @@ class control(object):
 		For dictionary search = it searches for entries and their assocatied meanings that correspond with the search string
 		For lookup search = it searches for usages examples that correspond with the search string
 	"""
-        print "a search for \"" + str + "\" was conducted"
+        string = unicode(string)
+        print "a search for \"" + string.encode('utf-8') + "\" was conducted"
         
         if (self.mode == "dictionary"):
-            if (str):
-                list_of_entries = dictionary_mode_search(str)
+            if (string):
+                list_of_entries = self.dbi.dict_mode_search(string)
                 #self.gui.dictionaryWords.addEntry(dictionary_mode_search(str).__str__(), "blah")
                 #print list_of_entries
                 self.gui.dictionaryWords.clearMeanings()
@@ -87,7 +88,7 @@ class control(object):
                     else:
                         button_text = u"{}".format(entry.kana)
 
-                    for meaning in entry.meanings:
+                    for meaning in entry.get_meanings(self.dbi):
                         self.gui.dictionaryWords.addMeaning(
                                 button_text, meaning.meaning, meaning)
                 self.gui.dictionary_2.show()
@@ -97,8 +98,9 @@ class control(object):
                 self.gui.dictionary_2.hide()
         else:    
             self.gui.UEarea.clearSentences()
-            if (str):
-                list_of_ues = lookup_mode_search(str)
+            print repr(string)
+            if (string):
+                list_of_ues = self.dbi.lookup_mode_search(string)
                 for ue in list_of_ues:
                     print ue
                     self.gui.UEarea.addSentence(
@@ -141,7 +143,7 @@ class control(object):
         #print "button has been clicked linked to \"" +str+ "\" meaning"
         print meaning
         self.gui.DictionaryWordsScrollArea.clearSentences()
-        for ue in meaning.usage_examples:
+        for ue in meaning.get_usage_examples(self.dbi):
             self.gui.DictionaryWordsScrollArea.addSentence(ue.expression, ue.meaning, 9.99, ue)
         
         self.gui.DictionaryWordsScrollArea.show()

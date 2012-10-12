@@ -7,6 +7,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+
+
 from PyQt4 import QtCore, QtGui
 from noj.data_structures import *
 
@@ -16,6 +18,9 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class Ui_meaningArea(QtGui.QWidget):
+    """ Ui_meaningArea is a subsection of the overall dictionary interface.
+    It displays the the matched words, then finds the associated meanings and translation.
+    """
     def __init__(self, parent, control):
         super(Ui_meaningArea, self).__init__(parent)
         self.setupUi(control)
@@ -28,7 +33,8 @@ class Ui_meaningArea(QtGui.QWidget):
         
         
     def addMeaning(self, meaning, translation, meaning_object):
-        
+        """ meanings is a button you can select for UE to be populated.
+        """
         meaningEntry = QtGui.QWidget(self)
         meaningEntry.setObjectName(_fromUtf8("meaningEntry"))
         meaningEntry.horizontalLayout_2 = QtGui.QHBoxLayout(meaningEntry)
@@ -55,8 +61,11 @@ class Ui_meaningArea(QtGui.QWidget):
 
 
     def clearMeanings(self):
-        for meaning in self.meanings:
+        """ deletes meanings and then hides and destroys the object """
+        #for meaning in self.meanings:
+        while len(self.meanings) > 0:
+            meaning = self.meanings.pop()
             meaning.hide()
             meaning.destroy()
-            self.meanings.remove(meaning)
+            #self.meanings.remove(meaning)
 

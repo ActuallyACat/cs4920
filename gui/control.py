@@ -154,6 +154,7 @@ class control(object):
         
     def viewList(self, listName):
         print listName
+        self.mode = "lookUp"
         self.gui.pushButtonLookUp.setEnabled(True)
         self.gui.pushButtonDictionary.setEnabled(True)
 

@@ -95,6 +95,9 @@ class control(object):
         self.search(str)
         self.gui.listMode()
         
+        #names = ["hello","harry"]
+        #self.gui.scrollAreaLists.populateUEs(names)
+        
     def dictionaryMode(self, str):
         self.mode = "dictionary"
         self.search(str)

@@ -89,7 +89,7 @@ class Ui_Lists(QtGui.QWidget):
         self.displayAll()
         
     def populateUEs(self, names):
-        self.clearUEList()()
+        self.clearUEList()
         for name in names:
             temp = Ui_List(self, self.control)
             temp.populate(name)

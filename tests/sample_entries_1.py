@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# 
+# The purpose of this file is to create sample
+# entries from a dictionary that contains:
+# words with meanings and usage examples
 
 from noj.data_structures import *
 

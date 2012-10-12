@@ -39,12 +39,13 @@ class DictionaryEntry(object):
     meanings = A list of meanings for the associated entry
 
     """
-    def __init__(self, kana, kanji, entry_number):
+    def __init__(self, kana, kanji, entry_number, id_ = None):
         super(DictionaryEntry, self).__init__()
         self.kana = kana
         self.kanji = kanji # is a list
         self.entry_number = entry_number
         self.meanings = list()
+        self.id_ = id_
 
     def add_meaning(self, meaning):
         """docstring for add_meaning
@@ -62,6 +63,14 @@ class DictionaryEntry(object):
     def kanji_string(self):
         """Return a string containing kanji separated by a dot"""
         return u"・".join(self.kanji)
+
+    def get_meanings(self, dbi):
+        """Get meanings from database."""
+        if self.meanings == [] or None:
+            if self.id_ is not None:
+                print "get meanings from db"
+                self.meanings = dbi.get_meanings(self.id_)
+        return self.meanings
     
     def __str__(self):
 
@@ -99,10 +108,11 @@ class DictionaryMeaning(object):
     meaning_number = as there might be multiple meanings, this will keep track
     usage_examples = a list of usage examples that use this dictionary meaning(optional)
     """
-    def __init__(self, meaning, meaning_number):
+    def __init__(self, meaning, meaning_number, id_ = None):
         super(DictionaryMeaning, self).__init__()
         self.meaning = meaning
         self.meaning_number = meaning_number
+        self.id_ = id_
         self.usage_examples = list()
 
     def add_usage_example(self, ue):
@@ -110,6 +120,15 @@ class DictionaryMeaning(object):
 
 Helper function that appends usage examples to Dictionary Meaning"""
         self.usage_examples.append(ue)
+
+    def get_usage_examples(self, dbi):
+        """Get usage examples from database."""
+        if self.usage_examples == [] or None:
+            if self.id_ is not None:
+                print "get ues from db"
+                self.usage_examples = dbi.get_usage_examples(self.id_)
+        return self.usage_examples
+
 
     def __str__(self):
         ue_str_list = list()

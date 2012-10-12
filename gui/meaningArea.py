@@ -62,8 +62,10 @@ class Ui_meaningArea(QtGui.QWidget):
 
     def clearMeanings(self):
         """ deletes meanings and then hides and destroys the object """
-        for meaning in self.meanings:
+        #for meaning in self.meanings:
+        while len(self.meanings) > 0:
+            meaning = self.meanings.pop()
             meaning.hide()
             meaning.destroy()
-            self.meanings.remove(meaning)
+            #self.meanings.remove(meaning)
 

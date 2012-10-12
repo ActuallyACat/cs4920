@@ -15,12 +15,16 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, control):
+class Ui_MainWindow(QtGui.QMainWindow):
+    def __init__(self, control):
+        super(Ui_MainWindow, self).__init__()
+        control.addGui(self)
+        self.setupUi(control)
+    def setupUi(self, control):
         self.control = control
-        MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(639, 411)
-        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.setObjectName(_fromUtf8("MainWindow"))
+        self.resize(639, 411)
+        self.centralwidget = QtGui.QWidget(self)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.centralwidget)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
@@ -137,8 +141,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_10.addWidget(self.exportArea)
         
         self.horizontalLayout_2.addWidget(self.splitter)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtGui.QMenuBar(MainWindow)
+        self.setCentralWidget(self.centralwidget)
+        self.menubar = QtGui.QMenuBar(self)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 639, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuTitle = QtGui.QMenu(self.menubar)
@@ -147,16 +151,16 @@ class Ui_MainWindow(object):
         self.menuOptions.setObjectName(_fromUtf8("menuOptions"))
         self.menuAbout = QtGui.QMenu(self.menubar)
         self.menuAbout.setObjectName(_fromUtf8("menuAbout"))
-        MainWindow.setMenuBar(self.menubar)
-        self.actionHelp = QtGui.QAction(MainWindow)
+        self.setMenuBar(self.menubar)
+        self.actionHelp = QtGui.QAction(self)
         self.actionHelp.setObjectName(_fromUtf8("actionHelp"))
-        self.actionAbout = QtGui.QAction(MainWindow)
+        self.actionAbout = QtGui.QAction(self)
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
-        self.actionSettings = QtGui.QAction(MainWindow)
+        self.actionSettings = QtGui.QAction(self)
         self.actionSettings.setObjectName(_fromUtf8("actionSettings"))
-        self.actionImport = QtGui.QAction(MainWindow)
+        self.actionImport = QtGui.QAction(self)
         self.actionImport.setObjectName(_fromUtf8("actionImport"))
-        self.actionExit = QtGui.QAction(MainWindow)
+        self.actionExit = QtGui.QAction(self)
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
         self.menuTitle.addAction(self.actionExit)
         self.menuOptions.addAction(self.actionSettings)
@@ -176,7 +180,7 @@ class Ui_MainWindow(object):
         self.actionExit.setShortcut('Ctrl+Q')
     
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi()
         #button connection time
         QtCore.QObject.connect(self.pushButtonDictionary, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("dictionary mode"))
         QtCore.QObject.connect(self.pushButtonLookUp, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("lookup mode"))
@@ -190,11 +194,11 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.saveAreaButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.addToList(self.comboBoxList.currentText()))
         QtCore.QObject.connect(self.exportButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.export())
 
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(self)
         self.control.lookUpMode("")
 
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+    def retranslateUi(self, ):
+        self.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonDictionary.setText(QtGui.QApplication.translate("MainWindow", "Dictionary", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonLookUp.setText(QtGui.QApplication.translate("MainWindow", "Look up", None, QtGui.QApplication.UnicodeUTF8))
         self.searchButton.setText(QtGui.QApplication.translate("MainWindow", "Search", None, QtGui.QApplication.UnicodeUTF8))
@@ -246,10 +250,7 @@ class Ui_MainWindow(object):
 def new(control):
     import sys
     app = QtGui.QApplication(sys.argv)
-    MainWindow = QtGui.QMainWindow()
-    ui = Ui_MainWindow()
-    control.addGui(ui)
-    ui.setupUi(MainWindow, control)
+    MainWindow = Ui_MainWindow(control)
     MainWindow.show()
     sys.exit(app.exec_())
 

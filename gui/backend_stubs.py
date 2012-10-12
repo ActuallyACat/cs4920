@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# This is temporary code that will be deleted when the backend code
+# is complete
 
 from tests.sample_entries_1 import *
 from noj.data_structures import *

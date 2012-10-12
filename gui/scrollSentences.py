@@ -2,6 +2,10 @@
 Created on 11/10/2012
 
 @author: sebastien
+
+ScrollSentences
+The purpose of this element is to show lists of the UE sentences with 3 components:
+japanese, english translation, i+n score
 '''
             
 from PyQt4 import QtCore, QtGui
@@ -13,6 +17,10 @@ except AttributeError:
             
             
 class Ui_ScrollArea(QtGui.QScrollArea):
+"""docstring Ui_ScrollArea
+This is for the overall layout of the area.
+The overall window is also scrollable.
+"""
     def __init__(self, parent):
         super(Ui_ScrollArea, self).__init__(parent)
         self.setupUi()
@@ -42,7 +50,10 @@ class Ui_ScrollArea(QtGui.QScrollArea):
 
 
     def addSentence(self, meaning, translation, score, ue):
-        
+            """docstring addSentence
+	Adds sentences to the list.
+	It'll take 3 inputs, japanese, english translation and i+N score
+	"""
         self.verticalLayout_5.removeItem(self.spacerItem)
         temp = QtGui.QWidget(self.scrollAreaWidgetContents_3)
         
@@ -111,6 +122,7 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         self.verticalLayout_5.addItem(self.spacerItem)
         
     def clearSentences(self):
+	"""deletes all sentences and recreates an empty object"""
         while len(self.sentences) > 0:
             sentence = self.sentences.pop()
             sentence.hide()
@@ -119,10 +131,9 @@ class Ui_ScrollArea(QtGui.QScrollArea):
         
             
     def getSentences(self):
+	"""loop for getting sentences off matching from the backend"""
         temp = []
         for sentence in self.sentences:
             temp.append(sentence.ue)
         return temp
             
-            
-

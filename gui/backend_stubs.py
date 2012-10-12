@@ -22,3 +22,7 @@ def lookup_mode_search(string):
                 list_of_ues.append(ue)
     return list_of_ues
 
+def get_user_ue_lists():
+    list_of_ue_lists = list()
+    ue_list = UsageExampleList('List1')
+    #ue_list.add_usage_example

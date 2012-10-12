@@ -142,6 +142,10 @@ class UsageExampleList(object):
     def set_ue_list(self, ue_list):
         """docstring for add_usage_example"""
         self.ue_list = ue_list
+
+    def save(self):
+        """Save UE list to database"""
+        pass
         
 
 if __name__ == '__main__':

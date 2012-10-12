@@ -11,8 +11,8 @@ FORMAT_TABS = 0
 
 class Dictionary(object):
     """docstring for Dictionary
-A Dictionary contains a 'name' for the dictionary and a subsequent list of 'entries'.
-"""
+    A Dictionary contains a 'name' for the dictionary and a subsequent list of 'entries'.
+    """
     def __init__(self, name):
         super(Dictionary, self).__init__()
         self.name = name
@@ -31,14 +31,14 @@ A Dictionary contains a 'name' for the dictionary and a subsequent list of 'entr
 class DictionaryEntry(object):
     """docstring for DictionaryEntry
 
-Creates Dictionary Entry structure which consists of 5 elements:
+    Creates Dictionary Entry structure which consists of 5 elements:
 
-kana = How the Japanese word is pronounced (stored as string)
-kanji = The entry in proper Japanese form (sotred as list)
-entry_number = ID number given to entry (stored as integer)
-meanings = A list of meanings for the associated entry
+    kana = How the Japanese word is pronounced (stored as string)
+    kanji = The entry in proper Japanese form (sotred as list)
+    entry_number = ID number given to entry (stored as integer)
+    meanings = A list of meanings for the associated entry
 
-"""
+    """
     def __init__(self, kana, kanji, entry_number):
         super(DictionaryEntry, self).__init__()
         self.kana = kana
@@ -48,16 +48,20 @@ meanings = A list of meanings for the associated entry
 
     def add_meaning(self, meaning):
         """docstring for add_meaning
-Add meaning to Dictionary Entry
-NOTE: An entry can have multiple meanings
-"""
+        Add meaning to Dictionary Entry
+        NOTE: An entry can have multiple meanings
+        """
         self.meanings.append(meaning)
 
     def num_meanings(self):
         """docstring for num_meanings
-Returns the number of meanings for a Dictionary Entry as entries may have multiple meanings
-"""
+        Returns the number of meanings for a Dictionary Entry as entries may have multiple meanings
+        """
         return len(self.meanings)
+    
+    def kanji_string(self):
+        """Return a string containing kanji separated by a dot"""
+        return u"・".join(self.kanji)
     
     def __str__(self):
 
@@ -86,15 +90,15 @@ Returns the number of meanings for a Dictionary Entry as entries may have multip
 
 class DictionaryMeaning(object):
     """docstring for DictionaryMeaning
-    
-A Dictionary Entry may have a Dictionary Meaning
 
-A Dictionary Meaning has 3 elements:
+    A Dictionary Entry may have a Dictionary Meaning
 
-meaning = the definition
-meaning_number = as there might be multiple meanings, this will keep track
-usage_examples = a list of usage examples that use this dictionary meaning(optional)
-"""
+    A Dictionary Meaning has 3 elements:
+
+    meaning = the definition
+    meaning_number = as there might be multiple meanings, this will keep track
+    usage_examples = a list of usage examples that use this dictionary meaning(optional)
+    """
     def __init__(self, meaning, meaning_number):
         super(DictionaryMeaning, self).__init__()
         self.meaning = meaning
@@ -128,28 +132,28 @@ Helper function that appends usage examples to Dictionary Meaning"""
 
 class UsageExample(object):
     """docstring for UsageExample
-	
-An usage example is a sentence that is associated with a particular word
 
-This class has 4 elements:
+    An usage example is a sentence that is associated with a particular word
 
-expression =  the sentence itself
-meaning = the meaning of the word assocaited witht he usage example
-type = is this a sentence or phase -> default is sentence
-components = what are the break up of words in the sentence
-"""
+    This class has 4 elements:
+
+    expression =  the sentence itself
+    meaning = the meaning of the word assocaited witht he usage example
+    type = is this a sentence or phase -> default is sentence
+    components = what are the break up of words in the sentence
+    """
     def __init__(self, expression, meaning, type_=SENTENCE):
         super(UsageExample, self).__init__()
         self.expression = expression
         self.meaning = meaning
-        self.type_ = type_ --> sentence or phrase --> defaults to sentence
+        self.type_ = type_
         self.components = None
 
     def get_components(self, parser):
         """docstring for get_components
 
-Places words that belong to the usage example as a list
-"""
+        Places words that belong to the usage example as a list
+        """
         if self.components is None:
             self.components = parser.parse(self.expression).components 
         return self.components
@@ -164,6 +168,32 @@ Places words that belong to the usage example as a list
                      repr(self.expression), repr(self.meaning), 
                      repr(self.type_)))
         return '\n'.join(lines)
+
+class UsageExampleList(object):
+    """docstring for UsageExampleList"""
+    def __init__(self, name):
+        super(UsageExampleList, self).__init__()
+        self.name = name
+        self.ue_list = list()
+        self.id_ = None
+
+    def add_usage_example(self, ue):
+        """docstring for add_usage_example"""
+        self.ue_list.append(ue)
+
+    def add_usage_examples(self, ue_list):
+        """docstring for add_usage_example"""
+        self.ue_list.extend(ue_list)
+
+    def set_ue_list(self, ue_list):
+        """docstring for add_usage_example"""
+        self.ue_list = ue_list
+
+    def save(self):
+        """Save UE list to database"""
+        print "TODO: save list=({}) to database".format(self.name)
+        pass
+        
 
 if __name__ == '__main__':
     db_interface = DatabaseInterface('sentence_library.db')

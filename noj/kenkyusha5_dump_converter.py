@@ -25,22 +25,22 @@ in_meaning = False
 class Kenkyusha5DumpConverter(object):
     """docstring for Kenkyusha5DumpConverter
     
-	The purpose of the converter is to extract words,
-	definitions, meanings, usage examples from the Kenkysha 5 library
-	into an usable format for the database.
-	
-	"""
+    The purpose of the converter is to extract words,
+    definitions, meanings, usage examples from the Kenkysha 5 library
+    into an usable format for the database.
+    
+    """
     def __init__(self, dumpfile):
         super(Kenkyusha5DumpConverter, self).__init__()
         self.dumpfile = dumpfile
 
     def convert(self, outfile):
         """docstring for convert'
-		
-		Convert is a function that runs through a series of regular expressions to extract the necessary items from the dump file.
-		
-		It delimites the file through tabs and ensures it captures words, the associated meanings and sentences.
-		"""
+        
+        Convert is a function that runs through a series of regular expressions to extract the necessary items from the dump file.
+        
+        It delimites the file through tabs and ensures it captures words, the associated meanings and sentences.
+        """
         fh_out = open(outfile,"w")
         #fh_out.write(self.replace_gaiji_hex(utf8_content))
 
@@ -97,9 +97,9 @@ class Kenkyusha5DumpConverter(object):
         fh_out.close()
 
 def split_entry(entry_line):
-	"""docstring for split_entry
-	Function helps seperate entries and ensure we dont double up.
-	"""
+    """docstring for split_entry
+    Function helps seperate entries and ensure we dont double up.
+    """
     m1 = re_entry_split1.match(entry_line)
     if m1:
         kana_and_number = m1.group(1)
@@ -134,9 +134,9 @@ def split_entry(entry_line):
     return {'kana':kana, 'number':number, 'kanji':kanji}
 
 def match_sentence(line):
-	"""docstring for match_sentence
-	Checks if passed sentences is matched in database.
-	"""
+    """docstring for match_sentence
+    Checks if passed sentences is matched in database.
+    """
     if re_example_sentence.search(line):
         if (re_example_sentence_filter1.search(line) is None
             and
@@ -147,7 +147,7 @@ def match_sentence(line):
 
 def entry_string(kana, number, kanji):
     """forming a string for an entry
-	A entry has 3 elements: kana, kanji and string length"""
+    A entry has 3 elements: kana, kanji and string length"""
     out = list()
     out.append(kana)
     if kanji is None:

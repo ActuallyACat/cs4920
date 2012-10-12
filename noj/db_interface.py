@@ -303,29 +303,65 @@ class DatabaseInterface(object):
             sys.exit(1)
             
     def lookup_mode_search(self, string):
+    	lists = list() #create empty list
 	try:
             con = lite.connect(self.db_path)
             with con:
                 cur = con.cursor()
-                cur.execute("SELECT * from usageExamples where id in " +
-                				"(SELECT usageExample fromUEConsistsOf where morpheme in "+
-                					"(SELECT id from morphemes where morpheme=?)"+
+                #Returns id, expression, meaning, reading, isSentence
+                cur.execute("SELECT * FROM usageExamples WHERE id IN " +
+                				"(SELECT usageExample FROM UEConsistsOf WHERE morpheme IN "+
+                					"(SELECT id FROM morphemes WHERE morpheme=?)"+
                 				")", string);
+                rows = cur.fetchall()
+                i = 0
+                for row in rows:
+                	#Create list of usageExamples
+                	#create new usage example
+                	ue = UsageExample (row["expression"], row["meaning"], 
+						row["type"], row["components"])
+                	lists[i] = ue
+                	i++
         except lite.Error, e:
             if con:
                 con.rollback()
             print "Error %s:" % e.args[0]
             sys.exit(1)
+        return lists
 
-	def dict_mode_search(self, string): 
+    def dict_mode_search(self, string): 
 		"""
+		#string is the morpheme
 		TODO: Returns a list of DictionaryEntry entries (from data_structures.py)
 		"""
-		try:
+        lists = list() #create empty list for kanji
+        try:
             con = lite.connect(self.db_path)
             with con:
-                cur = con.cursor()    
-                """"""
+                cur1 = con.cursor()    
+                #Join tables to obtain the kana and entry number
+                cur1.execute("SELECT e.id, e.number as entry_number, m.morpheme"+
+                			"FROM entries e, morphemes m"+
+                			"WHERE e.kana = m.id"+
+                			"AND m.morpheme=", string)
+                rows1 = cur.fetchall()	
+                #should loop over ALL results
+                
+                #now use id from previous select to obtain all related kanji
+                cur1 = con.cursor() 
+                cur1.execute("SELECT ehk.kanji, m.morpheme FROM"+
+                			 "EntryHasKanji ehk, morphemes m"+
+                			 "WHERE m.morphemeType in"+
+                			 	"(SELECT id FROM morphemeTypes WHERE type = 'KANJI_ENTRY')"+
+                			 "AND ehk.kanji = m.id"+
+                			 "AND ehk.entry =",rows1[id])
+                rows2 = cur.fetchall()
+                i = 0
+                for row in rows2:
+                    lists[i] = row[morpheme]
+                    i++
+                de = DictionaryEntry(rows1[kana], lists, rows1[entry_number], meanings)
+                return de
         except lite.Error, e:
             if con:
                 con.rollback()

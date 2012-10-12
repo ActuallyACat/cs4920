@@ -18,7 +18,6 @@ except AttributeError:
 class Ui_MainWindow(QtGui.QMainWindow):
     def __init__(self, control):
         super(Ui_MainWindow, self).__init__()
-        control.addGui(self)
         self.setupUi(control)
     def setupUi(self, control):
         self.control = control
@@ -195,6 +194,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.exportButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.export())
 
         QtCore.QMetaObject.connectSlotsByName(self)
+        
+        control.addGui(self)
         self.control.lookUpMode("")
 
     def retranslateUi(self, ):

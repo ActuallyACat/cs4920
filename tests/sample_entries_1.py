@@ -6,6 +6,8 @@ from noj.data_structures import *
 SAMPLE_ENTRIES_1 = list()
 SAMPLE_ENTRIES_2 = list()
 SAMPLE_ENTRIES_3 = list()
+SAMPLE_UES_1 = list()
+SAMPLE_UES_2 = list()
 
 e = DictionaryEntry(u'\u304a\u3068\u3053\u308d', [u'\u5fa1\u6240'], u'')
 m = DictionaryMeaning(u'\u3014\u76f8\u624b\u306e\u4f4f\u6240\u3092\u6307\u3057\u3066\u3015 your address.', 1)
@@ -116,4 +118,12 @@ ue = UsageExample(u'\u3042\u306e\u7537\u306f\u3042\u3042\u3067\u3082\u306a\u3044
 m.add_usage_example(ue)
 e.add_meaning(m)
 SAMPLE_ENTRIES_3.append(e)
+
+
+ue = UsageExample(u'\u5f7c\u306f\u3042\u3042\u3060\u3053\u3046\u3060\u3068\u6587\u53e5\u3070\u304b\u308a\u8a00\u3063\u3066, \u5168\u7136\u624b\u4f1d\u308f\u306a\u3044.', u"He does nothing but complain about this, that and the other, and doesn't \u2310help [give us any help] at all.", 0)
+SAMPLE_UES_1.append(ue)
+ue = UsageExample(u'\u307f\u3093\u306a\u3067\u304a\u4e92\u3044\u306e\u4f5c\u54c1\u3092\u3042\u3042\u3060\u3053\u3046\u3060\u3068\u6279\u8a55\u3057\u3042\u3063\u305f.', u"We all put forward a variety of comments on each other's work.", 0)
+SAMPLE_UES_1.append(ue)
+ue = UsageExample(u'\u5f7c\u306f\u56fd\u5bb6\u3068\u76f8\u5bb9\u308c\u306a\u3044\u601d\u60f3\u306e\u6301\u3061\u4e3b\u3068\u3057\u3066\u6295\u7344\u3055\u308c\u305f.', u'He was imprisoned as someone whose ideology was incompatible with that of the state.', 0)
+SAMPLE_UES_2.append(ue)
 

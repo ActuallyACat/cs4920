@@ -31,6 +31,9 @@ def lookup_mode_search(string):
 def get_user_ue_lists():
     list_of_ue_lists = list()
     ue_list = UsageExampleList('List1')
-    ue_list.set_ue_list([])
+    ue_list.set_ue_list(SAMPLE_UES_1)
     list_of_ue_lists.append(ue_list)
-    #ue_list.add_usage_example
+    ue_list = UsageExampleList('List2')
+    ue_list.set_ue_list(SAMPLE_UES_2)
+    list_of_ue_lists.append(ue_list)
+    return list_of_ue_lists

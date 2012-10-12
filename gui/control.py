@@ -32,7 +32,16 @@ class control(object):
         self.guiStartUp()
     
     def guiStartUp(self):
-        pass
+        #pass
+        user_ue_lists = get_user_ue_lists()
+        names = list()
+        for ue_list in user_ue_lists:
+            names.append(ue_list.name)
+            self.gui.addListToComboBox(ue_list.name)
+        #names = ["hello","harry"]
+        self.gui.scrollAreaLists.populateUEs(names)
+        #for n in names:
+            #self.gui.addListToComboBox(n)
 
     @property
     def dbi(self):

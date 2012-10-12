@@ -11,6 +11,7 @@ from noj.data_structures import *
 from noj.ue_exporter import *
 from noj.ue_library_importer import *
 from backend_stubs import *
+import os.path
 
 class control(object):
     '''
@@ -33,7 +34,7 @@ class control(object):
         if self._dbi is None:
             self._dbi = DatabaseInterface('../sentence_library.db')
         return self._dbi
-        
+
     def test(self, str):
         pass
         #print str
@@ -130,17 +131,23 @@ class control(object):
         
         fileName = importWindow.getFile()
         importWindow.setText("Importing From: " + fileName)
-
-        importer = LibraryImporter(fileName)
-        importer.set_db_path('../sentence_library.db')
-        importer.set_library('WADAI5')
+        dictDir = os.path.abspath(os.path.join(str(fileName), 
+                                  os.path.pardir))
+        print dictDir
         
-        i = 0
-        while i <= 100000:
-            importWindow.setProgress(i/1000)
-            importWindow.show()
-            i = i+1
-            print i/1000
+
+        importer = LibraryImporter(dictDir, self.dbi)
+        importer.set_library('WADAI5')
+
+        for progress in importer.import_progress():
+            print progress
+            importWindow.setProgress(progress.percent())
+
+        #i = 0
+        #while i <= 100000:
+            #importWindow.setProgress(i/1000)
+            #i = i+1
+            #print i/1000
             
         self.importing = False
         

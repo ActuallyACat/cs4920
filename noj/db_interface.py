@@ -4,7 +4,8 @@
 import sqlite3 as lite
 import sys
 import os
-from noj.data_structures import *
+#from noj.data_structures import *
+import noj.data_structures
 
 SCHEMA_PATH = '../schema.sql'
 
@@ -341,9 +342,8 @@ class DatabaseInterface(object):
             for row in rows:
                 #Create list of usageExamples
                 #create new usage example
-                ue = UsageExample (row[1], row[2], 
-                    row[3])
-                print ue
+                ue = noj.data_structures.UsageExample(row[1], row[2], row[3])
+                #print ue
                 lists.append(ue)
                 i += 1
         return lists
@@ -383,6 +383,6 @@ class DatabaseInterface(object):
 
 if __name__ == '__main__':
     dbi = DatabaseInterface('sentence_library.db')
-    #dbi.lookup_mode_search(u'先生')
+    print dbi.lookup_mode_search(u'才能')
     #print dbi.lookup_mode_search(u'先生')
-    dbi.dict_mode_search(u'先生')
+    #dbi.dict_mode_search(u'先生')

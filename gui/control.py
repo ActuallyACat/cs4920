@@ -15,12 +15,16 @@ from settingsGui import *
 import os.path
 
 class control(object):
-    '''
-    classdocs
+    '''docstring for control
+    
+	Control is our controller interface between our backend and frontend GUI.
+	
+	It initiates the GUI and has the key functions of searching, dictionary, lookup modes.
     '''
 
 
     def __init__(self, gui=""):
+	"""starts initial GUI"""
         self.mode = ""
         if gui:
             self.gui = gui
@@ -30,6 +34,7 @@ class control(object):
         self.user_ue_lists = dict()
         
     def addGui(self, gui):
+	"""starts other specificed GUI elements"""
         self.gui = gui
         self.guiStartUp()
     
@@ -58,6 +63,13 @@ class control(object):
         #print str
         
     def search(self, str):
+	"""docstring for search
+		
+		Search has 2 different functions: lookup and dictionary
+		
+		For dictionary search = it searches for entries and their assocatied meanings that correspond with the search string
+		For lookup search = it searches for usages examples that correspond with the search string
+	"""
         print "a search for \"" + str + "\" was conducted"
         
         if (self.mode == "dictionary"):
@@ -109,6 +121,7 @@ class control(object):
         
             
     def lookUpMode(self, str):
+	"""change to look up mode"""
         self.mode = "lookUp"
         self.search(str)
         self.gui.listMode()
@@ -117,12 +130,14 @@ class control(object):
         #self.gui.scrollAreaLists.populateUEs(names)
         
     def dictionaryMode(self, str):
+	"""change to dictionary mode"""
         self.mode = "dictionary"
         self.search(str)
         self.gui.dictionaryMode()
         
 
     def wordMeanings(self, str, meaning):
+	"""show meanings for dictionary search terms"""
         #print "button has been clicked linked to \"" +str+ "\" meaning"
         print meaning
         self.gui.DictionaryWordsScrollArea.clearSentences()
@@ -133,6 +148,7 @@ class control(object):
         self.gui.dictionaryModeList()
 
     def export(self):
+	"""export function exports a generated UE list"""
         print "export button was pressed"
         if (self.mode == "dictionary"):
             ue_list = self.gui.DictionaryWordsScrollArea.getSentences()
@@ -142,6 +158,10 @@ class control(object):
         exporter.export(exportGui.Ui_Export().getfile())
     
     def importButton(self):
+	"""import function to import in libraries.
+	
+		Visually there will be a progress bar displaying completion percentage
+	"""
         if self.importing == True:
             return
         
@@ -174,11 +194,13 @@ class control(object):
         self.importing = False
         
     def newWordList(self, name):
+	"""docstring for newWordList = creates a new word list"""
         print name
         #name is what the user has chosen for this list to be called
         self.gui.addListToComboBox(name)
     
     def newUEList(self, name):
+	"""docstring for newUEList = creates a new usage example list"""
         #name is what the user has chosen for this list to be called
         # user manually add
         self.gui.addListToComboBox(name)

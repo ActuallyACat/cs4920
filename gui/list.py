@@ -21,14 +21,14 @@ class Ui_Lists(QtGui.QWidget):
         self.setupUi(control)
         
     def setupUi(self, control):
-    """initial setup for lists
-	Consists of buttons for 'new UE list' and 'new word list' as well as functionality
-	to all for a drop down to add new lists.
-	This is all housed on the left hand side of the main setup and has scrolling functionality
-	if the lists become too long.
-	
-	There is  also the ability to adjust the width of the left hand side with a fix minimum size.
-	"""
+        """initial setup for lists
+        Consists of buttons for 'new UE list' and 'new word list' as well as functionality
+        to all for a drop down to add new lists.
+        This is all housed on the left hand side of the main setup and has scrolling functionality
+        if the lists become too long.
+
+        There is  also the ability to adjust the width of the left hand side with a fix minimum size.
+        """
         self.control = control
         self.words = []
         self.UEs = []
@@ -163,9 +163,9 @@ class Ui_Lists(QtGui.QWidget):
         self.ListWordNewButton.hide()
 
 class Ui_List(QtGui.QWidget):
-	"""
-	This is used for the creation of new lists under word or UE lists
-	"""
+    """
+    This is used for the creation of new lists under word or UE lists
+    """
     def __init__(self, parent, control):
         super(Ui_List, self).__init__(parent)
         self.setupUi(control, parent)

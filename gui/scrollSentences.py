@@ -17,10 +17,10 @@ except AttributeError:
             
             
 class Ui_ScrollArea(QtGui.QScrollArea):
-"""docstring Ui_ScrollArea
-This is for the overall layout of the area.
-The overall window is also scrollable.
-"""
+    """docstring Ui_ScrollArea
+    This is for the overall layout of the area.
+    The overall window is also scrollable.
+    """
     def __init__(self, parent):
         super(Ui_ScrollArea, self).__init__(parent)
         self.setupUi()
@@ -50,10 +50,10 @@ The overall window is also scrollable.
 
 
     def addSentence(self, meaning, translation, score, ue):
-            """docstring addSentence
-	Adds sentences to the list.
-	It'll take 3 inputs, japanese, english translation and i+N score
-	"""
+        """docstring addSentence
+        Adds sentences to the list.
+        It'll take 3 inputs, japanese, english translation and i+N score
+        """
         self.verticalLayout_5.removeItem(self.spacerItem)
         temp = QtGui.QWidget(self.scrollAreaWidgetContents_3)
         

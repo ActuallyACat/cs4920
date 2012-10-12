@@ -16,9 +16,9 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 class Ui_MainWindow(QtGui.QMainWindow):
-""" This is the main UI window.
-The left hand bar, search and export are the only persistent items for the UI
-"""
+    """ This is the main UI window.
+    The left hand bar, search and export are the only persistent items for the UI
+    """
     def __init__(self, control):
         super(Ui_MainWindow, self).__init__()
         self.setupUi(control)

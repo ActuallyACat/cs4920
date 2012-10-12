@@ -142,13 +142,16 @@ class control(object):
     def newWordList(self, name):
         print name
         #name is what the user has chosen for this list to be called
-        pass
+        self.gui.addListToComboBox(name)
     
     def newUEList(self, name):
         print name
         #name is what the user has chosen for this list to be called
-        pass
-    
+        self.gui.addListToComboBox(name)
+        
+    def addToList(self, listName):
+        #if the user selects a list, then presses save too.
+        print listName
 
 
 if __name__ == "__main__":

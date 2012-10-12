@@ -99,9 +99,31 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.dictionaryWords)
         self.DictionaryWordsScrollArea = scrollSentences.Ui_ScrollArea(self.dictionary_2)
         self.DictionaryWordsScrollArea.setObjectName(_fromUtf8("DictionaryWordsScrollArea"))
-
         self.verticalLayout_2.addWidget(self.DictionaryWordsScrollArea)
         self.verticalLayout_10.addWidget(self.dictionary_2)
+        
+        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_10.addItem(spacerItem)
+        
+        self.saveArea = QtGui.QWidget(self.rightPane)
+        self.saveArea.setObjectName(_fromUtf8("saveArea"))
+        self.saveAreahorizontalLayout_6 = QtGui.QHBoxLayout(self.saveArea)
+        self.saveAreahorizontalLayout_6.setMargin(0)
+        self.saveAreahorizontalLayout_6.setObjectName(_fromUtf8("saveAreahorizontalLayout_6"))
+        saveAreaspacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.saveAreahorizontalLayout_6.addItem(saveAreaspacerItem3)
+        self.comboBoxListLabel = QtGui.QLabel(self.saveArea)
+        self.comboBoxListLabel.setObjectName(_fromUtf8("comboBoxListLabel"))
+        self.saveAreahorizontalLayout_6.addWidget(self.comboBoxListLabel)
+        self.comboBoxList = QtGui.QComboBox(self.saveArea)
+        self.comboBoxList.setObjectName(_fromUtf8("comboBox"))
+        self.saveAreahorizontalLayout_6.addWidget(self.comboBoxList)
+        self.saveAreaButton = QtGui.QPushButton(self.saveArea)
+        self.saveAreaButton.setObjectName(_fromUtf8("saveAreaButton"))
+        self.saveAreaButton.setDisabled(True)
+        self.saveAreahorizontalLayout_6.addWidget(self.saveAreaButton)
+        self.verticalLayout_10.addWidget(self.saveArea)
+        
         self.exportArea = QtGui.QWidget(self.rightPane)
         self.exportArea.setObjectName(_fromUtf8("exportArea"))
         self.horizontalLayout_6 = QtGui.QHBoxLayout(self.exportArea)
@@ -112,9 +134,8 @@ class Ui_MainWindow(object):
         self.exportButton = QtGui.QPushButton(self.exportArea)
         self.exportButton.setObjectName(_fromUtf8("exportButton"))
         self.horizontalLayout_6.addWidget(self.exportButton)
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem)
         self.verticalLayout_10.addWidget(self.exportArea)
+        
         self.horizontalLayout_2.addWidget(self.splitter)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -166,6 +187,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.searchButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("search button"))
         QtCore.QObject.connect(self.searchButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.search(self.searchInput.text()))
         QtCore.QObject.connect(self.searchInput, QtCore.SIGNAL(_fromUtf8("returnPressed()")), lambda: self.control.search(self.searchInput.text()))
+        QtCore.QObject.connect(self.saveAreaButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.addToList(self.comboBoxList.currentText()))
         QtCore.QObject.connect(self.exportButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.export())
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -177,6 +199,8 @@ class Ui_MainWindow(object):
         self.pushButtonLookUp.setText(QtGui.QApplication.translate("MainWindow", "Look up", None, QtGui.QApplication.UnicodeUTF8))
         self.searchButton.setText(QtGui.QApplication.translate("MainWindow", "Search", None, QtGui.QApplication.UnicodeUTF8))
         self.dictionary_2.setProperty("mode_type", QtGui.QApplication.translate("MainWindow", "TEXT", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBoxListLabel.setText(QtGui.QApplication.translate("MainWindow", "Add to List", None, QtGui.QApplication.UnicodeUTF8))
+        self.saveAreaButton.setText(QtGui.QApplication.translate("MainWindow", "Add to List", None, QtGui.QApplication.UnicodeUTF8))
         self.exportButton.setText(QtGui.QApplication.translate("MainWindow", "Export", None, QtGui.QApplication.UnicodeUTF8))
         self.menuTitle.setTitle(QtGui.QApplication.translate("MainWindow", "title", None, QtGui.QApplication.UnicodeUTF8))
         self.menuOptions.setTitle(QtGui.QApplication.translate("MainWindow", "options", None, QtGui.QApplication.UnicodeUTF8))
@@ -189,6 +213,9 @@ class Ui_MainWindow(object):
         self.actionExit.setText(QtGui.QApplication.translate("MainWindow", "exit", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExit.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+Q", None, QtGui.QApplication.UnicodeUTF8))
 
+    def addListToComboBox(self, text):
+        self.comboBoxList.addItem(_fromUtf8(text))
+        self.saveAreaButton.setEnabled(True)
 
 def new(control):
     import sys

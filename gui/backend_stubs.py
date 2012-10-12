@@ -5,7 +5,10 @@ from tests.sample_entries_1 import *
 from noj.data_structures import *
 
 def dictionary_mode_search(string):
-    """docstring for dictionary_search"""
+    """docstring for dictionary_mode_search
+    Searches string through DB to find all possible matches for entries
+	Returns it as a list with respective meanings attached
+	"""
     #print SAMPLE_ENTRIES_1
     list_of_entries = list()
     #list_of_entries.append(SAMPLE_ENTRIES_2[0])
@@ -13,7 +16,10 @@ def dictionary_mode_search(string):
     #return list_of_entries
 
 def lookup_mode_search(string):
-    """docstring for dictionary_search"""
+    """docstring for lookup_mode_search
+	Searches string through DB to find all possible matches for entries
+	Returns it as a list of usage examples attached to respective entries
+	"""
     #print SAMPLE_ENTRIES_1
     list_of_ues = list()
     for entry in SAMPLE_ENTRIES_2:

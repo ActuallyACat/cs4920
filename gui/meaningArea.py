@@ -60,13 +60,3 @@ class Ui_meaningArea(QtGui.QWidget):
             meaning.destroy()
             self.meanings.remove(meaning)
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    meaningArea = QtGui.QWidget()
-    ui = Ui_meaningArea()
-    ui.setupUi(meaningArea)
-    meaningArea.show()
-    sys.exit(app.exec_())
-

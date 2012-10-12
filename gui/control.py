@@ -138,6 +138,17 @@ class control(object):
             print i/1000
             
         self.importing = False
+        
+    def newWordList(self, name):
+        print name
+        #name is what the user has chosen for this list to be called
+        pass
+    
+    def newUEList(self, name):
+        print name
+        #name is what the user has chosen for this list to be called
+        pass
+    
 
 
 if __name__ == "__main__":

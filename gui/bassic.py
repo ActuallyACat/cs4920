@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import control, list, meaningArea, ue, scrollSentences
+import control, list, meaningArea, ue, scrollSentences, list
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -58,35 +58,9 @@ class Ui_MainWindow(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
         self.verticalLayout_9.addWidget(self.ModePane)
-        self.scrollAreaLists = QtGui.QScrollArea(self.leftPane)
-        self.scrollAreaLists.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.scrollAreaLists.setFrameShadow(QtGui.QFrame.Sunken)
-        self.scrollAreaLists.setLineWidth(1)
-        self.scrollAreaLists.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.scrollAreaLists.setWidgetResizable(True)
+        self.scrollAreaLists = list.Ui_Lists(self.leftPane, self.control)
         self.scrollAreaLists.setObjectName(_fromUtf8("scrollAreaLists"))
-        self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 205, 242))
-        self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
-        self.gridLayout = QtGui.QGridLayout(self.scrollAreaWidgetContents_2)
-        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem1, 3, 0, 1, 1)
-        self.ListUENewButton = QtGui.QPushButton(self.scrollAreaWidgetContents_2)
-        self.ListUENewButton.setObjectName(_fromUtf8("ListUENewButton"))
-        self.gridLayout.addWidget(self.ListUENewButton, 0, 0, 1, 1)
-        self.ListWordNewButton = QtGui.QPushButton(self.scrollAreaWidgetContents_2)
-        self.ListWordNewButton.setObjectName(_fromUtf8("ListWordNewButton"))
-        self.gridLayout.addWidget(self.ListWordNewButton, 2, 0, 1, 1)
         
-        self.List = QtGui.QWidget(self.scrollAreaWidgetContents_2)
-        
-        #add the lists code to a list widget
-        list.Ui_List().setupUi(self.List)
-        
-        self.List.setObjectName(_fromUtf8("List"))
-        self.gridLayout.addWidget(self.List, 1, 0, 1, 1)
-        self.scrollAreaLists.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_9.addWidget(self.scrollAreaLists)
         self.rightPane = QtGui.QWidget(self.splitter)
         self.rightPane.setBaseSize(QtCore.QSize(0, 0))
@@ -188,9 +162,6 @@ class Ui_MainWindow(object):
 
         QtCore.QObject.connect(self.pushButtonDictionary, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.dictionaryMode(self.searchInput.text()))
         QtCore.QObject.connect(self.pushButtonLookUp, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.lookUpMode(self.searchInput.text()))
-
-        QtCore.QObject.connect(self.ListUENewButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("new ue list button"))
-        QtCore.QObject.connect(self.ListWordNewButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("new word list button"))
         
         QtCore.QObject.connect(self.searchButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.test("search button"))
         QtCore.QObject.connect(self.searchButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.search(self.searchInput.text()))
@@ -204,8 +175,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonDictionary.setText(QtGui.QApplication.translate("MainWindow", "Dictionary", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonLookUp.setText(QtGui.QApplication.translate("MainWindow", "Look up", None, QtGui.QApplication.UnicodeUTF8))
-        self.ListUENewButton.setText(QtGui.QApplication.translate("MainWindow", "New UE List", None, QtGui.QApplication.UnicodeUTF8))
-        self.ListWordNewButton.setText(QtGui.QApplication.translate("MainWindow", "New Word List", None, QtGui.QApplication.UnicodeUTF8))
         self.searchButton.setText(QtGui.QApplication.translate("MainWindow", "Search", None, QtGui.QApplication.UnicodeUTF8))
         self.dictionary_2.setProperty("mode_type", QtGui.QApplication.translate("MainWindow", "TEXT", None, QtGui.QApplication.UnicodeUTF8))
         self.exportButton.setText(QtGui.QApplication.translate("MainWindow", "Export", None, QtGui.QApplication.UnicodeUTF8))

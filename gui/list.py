@@ -21,6 +21,14 @@ class Ui_Lists(QtGui.QWidget):
         self.setupUi(control)
         
     def setupUi(self, control):
+    """initial setup for lists
+	Consists of buttons for 'new UE list' and 'new word list' as well as functionality
+	to all for a drop down to add new lists.
+	This is all housed on the left hand side of the main setup and has scrolling functionality
+	if the lists become too long.
+	
+	There is  also the ability to adjust the width of the left hand side with a fix minimum size.
+	"""
         self.control = control
         self.words = []
         self.UEs = []
@@ -63,22 +71,26 @@ class Ui_Lists(QtGui.QWidget):
         self.hideWordListButton()
 
     def retranslateUi(self):
+	"""allows buttons to shift correctly if left hand side gets extended"""
         self.ListUENewButton.setText(QtGui.QApplication.translate("Form", "New UE List", None, QtGui.QApplication.UnicodeUTF8))
         self.ListWordNewButton.setText(QtGui.QApplication.translate("Form", "New Word List", None, QtGui.QApplication.UnicodeUTF8))
 
     def newWordList(self):
+	"""definitions for the button newWordList and also to set up on release state"""
         temp = Ui_List(self, self.control)
         self.words.append(temp)
         self.displayNone()
         self.displayAll()
     
     def newUEList(self):
+	"""definitions for the button newUEList and also to set up on release state"""
         temp = Ui_List(self, self.control)
         self.UEs.append(temp)
         self.displayNone()
         self.displayAll()
         
     def populateWords(self, names):
+	"""add words to a word list"""
         self.clearWordList()
         for name in names:
             temp = Ui_List(self, self.control)
@@ -89,6 +101,7 @@ class Ui_Lists(QtGui.QWidget):
         self.displayAll()
         
     def populateUEs(self, names):
+	"""add UEs to a UE list"""
         self.clearUEList()
         for name in names:
             temp = Ui_List(self, self.control)
@@ -99,6 +112,7 @@ class Ui_Lists(QtGui.QWidget):
         self.displayAll()
         
     def displayAll(self):
+	"""expand all words and UE lists to be displayed"""
         self.verticalLayout_2.addWidget(self.ListUENewButton)
         for ue in self.UEs:
             self.verticalLayout_2.addWidget(ue)
@@ -110,6 +124,7 @@ class Ui_Lists(QtGui.QWidget):
         self.verticalLayout_2.addItem(self.spacerItem)
         
     def displayNone(self):
+	"""hide all words and UE lists from being displayed"""
         self.verticalLayout_2.removeWidget(self.ListUENewButton)
         for ue in self.UEs:
             self.verticalLayout_2.removeWidget(ue)
@@ -122,12 +137,14 @@ class Ui_Lists(QtGui.QWidget):
             
             
     def clearUEList(self):
+	"""delete the current UE list, make a new empty list and hide"""
         for word in self.words:
             word.hide()
             word.destroy()
             self.words.remove(word)
             
     def clearWordList(self):
+	"""delete the current word list, make a new empty list and hide"""
         for ue in self.UEs:
             ue.hide()
             ue.destroy()
@@ -142,9 +159,13 @@ class Ui_Lists(QtGui.QWidget):
     
 
     def hideWordListButton(self):
+	"""This was implemented in the eventuality that we may not have wordlists completed"""
         self.ListWordNewButton.hide()
 
 class Ui_List(QtGui.QWidget):
+	"""
+	This is used for the creation of new lists under word or UE lists
+	"""
     def __init__(self, parent, control):
         super(Ui_List, self).__init__(parent)
         self.setupUi(control, parent)
@@ -191,11 +212,13 @@ class Ui_List(QtGui.QWidget):
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
+	"""allow the buttons to scale if dimenisions change"""
         self.label.setText(QtGui.QApplication.translate("List", self.text, None, QtGui.QApplication.UnicodeUTF8))
         self.viewButton.setText(QtGui.QApplication.translate("List", "View", None, QtGui.QApplication.UnicodeUTF8))
 
 
     def namechange(self):
+	"""change the name of the list"""
         self.Listendview.hide()
         self.ListNameEdit.show()
         self.viewButton.setDisabled(True)

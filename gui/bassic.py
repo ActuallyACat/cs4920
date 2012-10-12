@@ -102,8 +102,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.DictionaryWordsScrollArea)
         self.verticalLayout_10.addWidget(self.dictionary_2)
         
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem)
+        self.rightPaneSpacerItem = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_10.addItem(self.rightPaneSpacerItem)
         
         self.saveArea = QtGui.QWidget(self.rightPane)
         self.saveArea.setObjectName(_fromUtf8("saveArea"))
@@ -199,7 +199,7 @@ class Ui_MainWindow(object):
         self.pushButtonLookUp.setText(QtGui.QApplication.translate("MainWindow", "Look up", None, QtGui.QApplication.UnicodeUTF8))
         self.searchButton.setText(QtGui.QApplication.translate("MainWindow", "Search", None, QtGui.QApplication.UnicodeUTF8))
         self.dictionary_2.setProperty("mode_type", QtGui.QApplication.translate("MainWindow", "TEXT", None, QtGui.QApplication.UnicodeUTF8))
-        self.comboBoxListLabel.setText(QtGui.QApplication.translate("MainWindow", "Add to List", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBoxListLabel.setText(QtGui.QApplication.translate("MainWindow", "Add all to List", None, QtGui.QApplication.UnicodeUTF8))
         self.saveAreaButton.setText(QtGui.QApplication.translate("MainWindow", "Add to List", None, QtGui.QApplication.UnicodeUTF8))
         self.exportButton.setText(QtGui.QApplication.translate("MainWindow", "Export", None, QtGui.QApplication.UnicodeUTF8))
         self.menuTitle.setTitle(QtGui.QApplication.translate("MainWindow", "title", None, QtGui.QApplication.UnicodeUTF8))
@@ -216,6 +216,32 @@ class Ui_MainWindow(object):
     def addListToComboBox(self, text):
         self.comboBoxList.addItem(_fromUtf8(text))
         self.saveAreaButton.setEnabled(True)
+        
+    def dictionaryMode(self):
+        self.dictionary_2.show()
+        self.UEarea.hide()
+        self.DictionaryWordsScrollArea.hide()
+        self.pushButtonDictionary.setDisabled(True)
+        self.pushButtonLookUp.setEnabled(True)
+        
+        
+        self.verticalLayout_10.removeWidget(self.saveArea)
+        self.verticalLayout_10.removeWidget(self.exportArea)
+        self.verticalLayout_10.addItem(self.rightPaneSpacerItem)
+        self.verticalLayout_10.addWidget(self.saveArea)
+        self.verticalLayout_10.addWidget(self.exportArea)
+        
+        
+    def dictionaryModeList(self):
+        self.verticalLayout_10.removeItem(self.rightPaneSpacerItem)
+        
+    def listMode(self):
+        self.UEarea.show()
+        self.dictionary_2.hide()
+        self.pushButtonLookUp.setDisabled(True)
+        self.pushButtonDictionary.setEnabled(True)
+        
+        self.verticalLayout_10.removeItem(self.rightPaneSpacerItem)
 
 def new(control):
     import sys

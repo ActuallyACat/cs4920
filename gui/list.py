@@ -35,7 +35,6 @@ class Ui_Lists(QtGui.QWidget):
         self.scrollAreaLists.setWidgetResizable(True)
         self.scrollAreaLists.setObjectName(_fromUtf8("scrollAreaLists"))
         self.scrollAreaWidgetContents_2 = QtGui.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 380, 280))
         self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
@@ -48,7 +47,7 @@ class Ui_Lists(QtGui.QWidget):
         self.ListWordNewButton = QtGui.QPushButton(self.scrollAreaWidgetContents_2)
         self.ListWordNewButton.setObjectName(_fromUtf8("ListWordNewButton"))
         self.verticalLayout_2.addWidget(self.ListWordNewButton)
-        self.spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.spacerItem = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(self.spacerItem)
         self.scrollAreaLists.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout.addWidget(self.scrollAreaLists)
@@ -75,6 +74,26 @@ class Ui_Lists(QtGui.QWidget):
     def newUEList(self):
         temp = Ui_List(self, self.control)
         self.UEs.append(temp)
+        self.displayNone()
+        self.displayAll()
+        
+    def populateWords(self, names):
+        self.clearWordList()
+        for name in names:
+            temp = Ui_List(self, self.control)
+            temp.populate(name)
+            self.words.append(temp)
+            
+        self.displayNone()
+        self.displayAll()
+        
+    def populateUEs(self, names):
+        self.clearUEList()()
+        for name in names:
+            temp = Ui_List(self, self.control)
+            temp.populate(name)
+            self.UEs.append(temp)
+        
         self.displayNone()
         self.displayAll()
         
@@ -158,7 +177,7 @@ class Ui_List(QtGui.QWidget):
         self.label = QtGui.QLabel(self.Listendview)
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout.addWidget(self.label)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        spacerItem = QtGui.QSpacerItem(40, 0, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout.addWidget(self.Listendview)
         
@@ -177,6 +196,11 @@ class Ui_List(QtGui.QWidget):
         self.Listendview.hide()
         self.ListNameEdit.show()
         self.viewButton.setDisabled(True)
+        
+    def populate(self, text):
+        self.displayText()
+        self.text = text
+        self.label.setText(QtGui.QApplication.translate("List", self.text, None, QtGui.QApplication.UnicodeUTF8))
     
     def displayText(self):
         self.ListNameEdit.hide()

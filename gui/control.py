@@ -130,7 +130,7 @@ class control(object):
         importWindow.show()
         
         fileName = importWindow.getFile()
-        importWindow.setText("Importing From: " + fileName)
+        importWindow.setText("Importing From: " + str(fileName))
         dictDir = os.path.abspath(os.path.join(str(fileName), 
                                   os.path.pardir))
         print dictDir
@@ -157,7 +157,6 @@ class control(object):
         self.gui.addListToComboBox(name)
     
     def newUEList(self, name):
-        print name
         #name is what the user has chosen for this list to be called
         self.gui.addListToComboBox(name)
         

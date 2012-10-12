@@ -130,10 +130,10 @@ class control(object):
         importWindow.show()
         
         fileName = importWindow.getFile()
-        importWindow.setText("Importing From: " + fileName)
         dictDir = os.path.abspath(os.path.join(str(fileName), 
                                   os.path.pardir))
         print dictDir
+        importWindow.setText("Importing From: " + dictDir)
         
 
         importer = LibraryImporter(dictDir, self.dbi)
@@ -169,6 +169,14 @@ class control(object):
         print listName
         self.gui.pushButtonLookUp.setEnabled(True)
         self.gui.pushButtonDictionary.setEnabled(True)
+
+        self.gui.UEarea.clearSentences()
+        if (str):
+            list_of_ues = lookup_mode_search(str)
+            for ue in list_of_ues:
+                print ue
+                self.gui.UEarea.addSentence(
+                        ue.expression, ue.meaning, 1.99, ue)
 
 
 if __name__ == "__main__":

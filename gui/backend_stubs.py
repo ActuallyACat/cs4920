@@ -21,3 +21,4 @@ def lookup_mode_search(string):
             for ue in meaning.usage_examples:
                 list_of_ues.append(ue)
     return list_of_ues
+

@@ -127,6 +127,23 @@ class UsageExample(object):
                      repr(self.type_)))
         return '\n'.join(lines)
 
+class UsageExampleList(object):
+    """docstring for UsageExampleList"""
+    def __init__(self, name):
+        super(UsageExampleList, self).__init__()
+        self.name = name
+        self.ue_list = list()
+        self.id_ = None
+
+    def add_usage_example(self, ue):
+        """docstring for add_usage_example"""
+        self.ue_list.append(ue)
+
+    def set_ue_list(self, ue_list):
+        """docstring for add_usage_example"""
+        self.ue_list = ue_list
+        
+
 if __name__ == '__main__':
     db_interface = DatabaseInterface('sentence_library.db')
     dictionary = Dictionary('Test Dict')

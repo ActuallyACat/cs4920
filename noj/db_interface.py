@@ -302,4 +302,32 @@ class DatabaseInterface(object):
             print "Error %s:" % e.args[0]
             sys.exit(1)
             
-    
+    def lookup_mode_search(self, string):
+		try:
+            con = lite.connect(self.db_path)
+            with con:
+                cur = con.cursor()
+                cur.execute("SELECT * from usageExamples where id in " +
+                				"(SELECT usageExample fromUEConsistsOf where morpheme in "+
+                					"(SELECT id from morphemes where morpheme=?)"+
+                				")", string);
+        except lite.Error, e:
+            if con:
+                con.rollback()
+            print "Error %s:" % e.args[0]
+            sys.exit(1)
+
+	def dict_mode_search(self, string): 
+		"""
+		TODO: Returns a list of DictionaryEntry entries (from data_structures.py)
+		"""
+		try:
+            con = lite.connect(self.db_path)
+            with con:
+                cur = con.cursor()    
+                """"""
+        except lite.Error, e:
+            if con:
+                con.rollback()
+            print "Error %s:" % e.args[0]
+            sys.exit(1)

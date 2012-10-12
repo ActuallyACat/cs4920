@@ -20,16 +20,24 @@ re_ue = re.compile(r'^\t\t[^\t]')
 re_ue_split = re.compile(r'^\t\t([^\t]*)\t([^\t]*)\n')
 
 class LibraryImporter(object):
-    """docstring for LibraryImporter"""
+    """docstring for LibraryImporter
+    Used to import user libraries into the program
+	"""
     def __init__(self):
         super(LibraryImporter, self).__init__()
 
     def set_library(self, library_code):
-        """docstring for set_library"""
+        """docstring for set_library
+		Sets the active library
+		"""
         self.library_code = library_code
         
     def prepare_library(self):
-        """docstring for prepare"""
+        """docstring for prepare
+		Prepares library by dumping library from epwing format and then
+		its put through a converter to ensure it can be stored in the 
+		DB schema
+		"""
         if self.library_code == 'WADAI5':
             dumper = Kenkyusha5Dumper('kenkyusha')
             dumper.dump('kenkyusha_dump')
@@ -37,7 +45,9 @@ class LibraryImporter(object):
             dump_converter.convert('kenkyusha_converted')
     
     def import_progress(self):
-        """docstring for import_progress"""
+        """docstring for import_progress
+		Prints out the progress of importing a library into the DB
+		"""
         progress = ProgressPoint(1, 2, 0, 1)
         yield progress
         self.prepare_library()
@@ -59,7 +69,10 @@ class LibraryImporter(object):
         dbi.commit()
 
 class UELibraryImporter(object):
-    """Imports usage example libraries"""
+    """Imports usage example libraries
+	Usage Example libraries are basically libraries full of sentences.
+	This call helps by formatting the import file into a format that the is in line with the DB schema.
+	"""
     def __init__(self, file_, encoding='utf-8'):
         super(UELibraryImporter, self).__init__()
         self.fh = codecs.open(file_, 'r', encoding=encoding)
@@ -73,7 +86,8 @@ class UELibraryImporter(object):
 
 
     def process_headers(self):
-        """docstring for process_headers"""
+        """docstring for process_headers
+		Determines what the headers are and labels them accordingly"""
         for line in self.fh:
             line = line.rstrip()
             if line == '':
@@ -94,7 +108,10 @@ class UELibraryImporter(object):
                         self.format_type = FORMAT_TABS
 
     def read_entry(self):
-        """docstring for read_entry"""
+        """docstring for read_entry
+		Reads in the lines from a list and parses them through the DB.
+		It also checks if the entry is already in the DB.
+		"""
         lines = list()
         for line in self.fh:
             #print self.prev_line,
@@ -105,7 +122,10 @@ class UELibraryImporter(object):
         return self.parse_entry_lines(lines)
 
     def parse_entry_lines(self, lines):
-        """docstring for parse_entry_lines"""
+        """docstring for parse_entry_lines
+		Parses entry lines to the DB and check if meanings and usage examples 
+		match the entry.
+		"""
         entry = None
         for line in lines:
             if re_entry.match(line):
@@ -135,7 +155,9 @@ class UELibraryImporter(object):
             entry = self.read_entry()
 
 def import_library():
-    """docstring for import_library"""
+    """docstring for import_library
+	Used to import user libraries into the program
+	"""
     dbi = DatabaseInterface('sentence_library2.db')
     dbi.reset_database()
     importer = UELibraryImporter('out2')
@@ -178,7 +200,8 @@ def num_entries(fname):
     #dbi.commit()
 
 class ProgressPoint(object):
-    """docstring for ProgressPoint"""
+    """docstring for ProgressPoint
+	Displays progress as a percentage"""
     def __init__(self, phase, total_phases, point, total_points):
         super(ProgressPoint, self).__init__()
         self.total_phases = total_phases

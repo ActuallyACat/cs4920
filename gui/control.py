@@ -204,16 +204,10 @@ class control(object):
         
         #self.mode = "lookUp"
         self.lookUpMode("")
-        self.mode = "viewMode"
+        #self.mode = "viewMode"
 
         self.gui.pushButtonLookUp.setEnabled(True)
         self.gui.pushButtonDictionary.setEnabled(True)
-        
-    def settingsWindow(self):
-        settingsControler = settingsControl()
-        settingsGui = Ui_settings(settingsControler)
-        settingsGui.show()
-
         self.gui.UEarea.clearSentences()
 
         user_ue_list = self.user_ue_lists[str(listName)]
@@ -221,6 +215,12 @@ class control(object):
             print ue
             self.gui.UEarea.addSentence(
                     ue.expression, ue.meaning, 1.99, ue)
+        
+    def settingsWindow(self):
+        settingsControler = settingsControl()
+        settingsGui = Ui_settings(settingsControler)
+        settingsGui.show()
+
 
 if __name__ == "__main__":
     control = control()

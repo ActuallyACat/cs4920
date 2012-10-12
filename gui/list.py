@@ -60,6 +60,7 @@ class Ui_Lists(QtGui.QWidget):
         
         self.displayNone()
         self.displayAll()
+        self.hideWordListButton()
 
     def retranslateUi(self):
         self.ListUENewButton.setText(QtGui.QApplication.translate("Form", "New UE List", None, QtGui.QApplication.UnicodeUTF8))
@@ -88,7 +89,7 @@ class Ui_Lists(QtGui.QWidget):
         self.displayAll()
         
     def populateUEs(self, names):
-        self.clearUEList()()
+        self.clearUEList()
         for name in names:
             temp = Ui_List(self, self.control)
             temp.populate(name)
@@ -140,6 +141,8 @@ class Ui_Lists(QtGui.QWidget):
             self.control.newUEList(list.text)
     
 
+    def hideWordListButton(self):
+        self.ListWordNewButton.hide()
 
 class Ui_List(QtGui.QWidget):
     def __init__(self, parent, control):

@@ -95,6 +95,9 @@ class control(object):
         self.search(str)
         self.gui.listMode()
         
+        #names = ["hello","harry"]
+        #self.gui.scrollAreaLists.populateUEs(names)
+        
     def dictionaryMode(self, str):
         self.mode = "dictionary"
         self.search(str)
@@ -130,6 +133,7 @@ class control(object):
         importWindow.show()
         
         fileName = importWindow.getFile()
+        importWindow.setText("Importing From: " + str(fileName))
         dictDir = os.path.abspath(os.path.join(str(fileName), 
                                   os.path.pardir))
         print dictDir
@@ -157,7 +161,6 @@ class control(object):
         self.gui.addListToComboBox(name)
     
     def newUEList(self, name):
-        print name
         #name is what the user has chosen for this list to be called
         self.gui.addListToComboBox(name)
         
@@ -167,6 +170,7 @@ class control(object):
         
     def viewList(self, listName):
         print listName
+        self.mode = "lookUp"
         self.gui.pushButtonLookUp.setEnabled(True)
         self.gui.pushButtonDictionary.setEnabled(True)
 

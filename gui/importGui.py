@@ -64,8 +64,7 @@ class Ui_Import(QtGui.QDialog):
         self.Description.setText(_fromUtf8(text))
 
     def getFile(self):
-        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', 
-        '/home')
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '/home')
         
         return fname
 

@@ -11,6 +11,7 @@ from noj.data_structures import *
 from noj.ue_exporter import *
 from noj.ue_library_importer import *
 from backend_stubs import *
+from settingsGui import *
 import os.path
 
 class control(object):
@@ -108,7 +109,7 @@ class control(object):
         self.mode = "dictionary"
         self.search(str)
         self.gui.dictionaryMode()
-            
+        
 
     def wordMeanings(self, str, meaning):
         #print "button has been clicked linked to \"" +str+ "\" meaning"
@@ -178,6 +179,11 @@ class control(object):
         self.mode = "lookUp"
         self.gui.pushButtonLookUp.setEnabled(True)
         self.gui.pushButtonDictionary.setEnabled(True)
+        
+    def settingsWindow(self):
+        settingsControler = settingsControl()
+        settingsGui = Ui_settings(settingsControler)
+        settingsGui.show()
 
 
 if __name__ == "__main__":

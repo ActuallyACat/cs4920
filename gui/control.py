@@ -34,7 +34,6 @@ class control(object):
         return self._dbi
         
     def test(self, str):
-        
         pass
         #print str
         
@@ -93,12 +92,16 @@ class control(object):
         self.mode = "lookUp"
         self.gui.UEarea.show()
         self.gui.dictionary_2.hide()
+        self.gui.pushButtonLookUp.setDisabled(True)
+        self.gui.pushButtonDictionary.setEnabled(True)
         self.search(str)
         
     def dictionaryMode(self, str):
         self.mode = "dictionary"
         self.gui.dictionary_2.show()
         self.gui.UEarea.hide()
+        self.gui.pushButtonDictionary.setDisabled(True)
+        self.gui.pushButtonLookUp.setEnabled(True)
         self.search(str)
             
 
@@ -152,6 +155,11 @@ class control(object):
     def addToList(self, listName):
         #if the user selects a list, then presses save too.
         print listName
+        
+    def viewList(self, listName):
+        print listName
+        self.gui.pushButtonLookUp.setEnabled(True)
+        self.gui.pushButtonDictionary.setEnabled(True)
 
 
 if __name__ == "__main__":

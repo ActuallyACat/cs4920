@@ -171,7 +171,7 @@ class Ui_MainWindow(object):
         self.actionAbout.triggered.connect(lambda: control.test("about"))
         self.actionSettings.triggered.connect(lambda: control.test("settings"))
         self.actionImport.triggered.connect(lambda: control.importButton())
-        self.actionExit.setShortcut('Ctrl+O')
+        self.actionExit.setShortcut('Ctrl+I')
         self.actionExit.triggered.connect(QtGui.qApp.quit)
         self.actionExit.setShortcut('Ctrl+Q')
     
@@ -209,7 +209,7 @@ class Ui_MainWindow(object):
         self.actionAbout.setText(QtGui.QApplication.translate("MainWindow", "about", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSettings.setText(QtGui.QApplication.translate("MainWindow", "settings", None, QtGui.QApplication.UnicodeUTF8))
         self.actionImport.setText(QtGui.QApplication.translate("MainWindow", "Import", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionImport.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+O", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionImport.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+I", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExit.setText(QtGui.QApplication.translate("MainWindow", "exit", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExit.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+Q", None, QtGui.QApplication.UnicodeUTF8))
 

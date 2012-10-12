@@ -147,6 +147,9 @@ class Ui_List(QtGui.QWidget):
         self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_2.setObjectName(_fromUtf8("line_2"))
         self.horizontalLayout.addWidget(self.line_2)
+        self.viewButton = QtGui.QToolButton(self.Listendview)
+        self.viewButton.setObjectName(_fromUtf8("viewButton"))
+        self.horizontalLayout.addWidget(self.viewButton)
         self.line = QtGui.QFrame(self.Listendview)
         self.line.setFrameShape(QtGui.QFrame.VLine)
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
@@ -162,18 +165,22 @@ class Ui_List(QtGui.QWidget):
         self.retranslateUi()
         self.namechange()
         QtCore.QObject.connect(self.ListNameEdit, QtCore.SIGNAL(_fromUtf8("returnPressed()")), lambda: self.parent.displayText(self))
+        QtCore.QObject.connect(self.viewButton, QtCore.SIGNAL(_fromUtf8("released()")), lambda: self.control.viewList(self.text))
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self):
         self.label.setText(QtGui.QApplication.translate("List", self.text, None, QtGui.QApplication.UnicodeUTF8))
+        self.viewButton.setText(QtGui.QApplication.translate("List", "View", None, QtGui.QApplication.UnicodeUTF8))
 
 
     def namechange(self):
         self.Listendview.hide()
         self.ListNameEdit.show()
+        self.viewButton.setDisabled(True)
     
     def displayText(self):
         self.ListNameEdit.hide()
         self.Listendview.show()
         self.text = self.ListNameEdit.text()
         self.label.setText(QtGui.QApplication.translate("List", self.text, None, QtGui.QApplication.UnicodeUTF8))
+        self.viewButton.setEnabled(True)

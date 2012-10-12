@@ -21,12 +21,18 @@ class control(object):
 
     def __init__(self, gui=""):
         self.mode = ""
-        self.gui = gui
+        if gui:
+            self.gui = gui
+            self.guiStartUp()
         self._dbi = None
         self.importing = False
         
     def addGui(self, gui):
         self.gui = gui
+        self.guiStartUp()
+    
+    def guiStartUp(self):
+        pass
 
     @property
     def dbi(self):

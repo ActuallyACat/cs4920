@@ -2,6 +2,10 @@
 Created on 11/10/2012
 
 @author: sebastien
+
+importGUI
+
+A standalone pop-up window under the setup button that allows a user to import libraries into the DB.
 '''
 
 from PyQt4 import QtCore, QtGui

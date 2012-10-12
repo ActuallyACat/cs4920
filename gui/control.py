@@ -26,6 +26,7 @@ class control(object):
             self.guiStartUp()
         self._dbi = None
         self.importing = False
+        self.user_ue_lists = dict()
         
     def addGui(self, gui):
         self.gui = gui
@@ -38,6 +39,7 @@ class control(object):
         for ue_list in user_ue_lists:
             names.append(ue_list.name)
             self.gui.addListToComboBox(ue_list.name)
+            self.user_ue_lists[ue_list.name] = ue_list
         #names = ["hello","harry"]
         self.gui.scrollAreaLists.populateUEs(names)
         #for n in names:
@@ -177,26 +179,42 @@ class control(object):
     
     def newUEList(self, name):
         #name is what the user has chosen for this list to be called
+        # user manually add
         self.gui.addListToComboBox(name)
+        user_ue_list = UsageExampleList(str(name))
+        self.user_ue_lists[str(name)] = user_ue_list
+        user_ue_list.save()
         
     def addToList(self, listName):
         #if the user selects a list, then presses save too.
+        # add ues to list
+        # todo
+        if (self.mode == "dictionary"):
+            ue_list = self.gui.DictionaryWordsScrollArea.getSentences()
+        else:
+            ue_list = self.gui.UEarea.getSentences()
+        user_ue_list = self.user_ue_lists[str(listName)]
+        user_ue_list.add_usage_examples(ue_list)
+        user_ue_list.save()
         print listName
         
     def viewList(self, listName):
         print listName
-        self.mode = "lookUp"
+        
+        #self.mode = "lookUp"
+        self.lookUpMode("")
+        self.mode = "viewMode"
+
         self.gui.pushButtonLookUp.setEnabled(True)
         self.gui.pushButtonDictionary.setEnabled(True)
 
         self.gui.UEarea.clearSentences()
-        if (str):
-            list_of_ues = lookup_mode_search(str)
-            for ue in list_of_ues:
-                print ue
-                self.gui.UEarea.addSentence(
-                        ue.expression, ue.meaning, 1.99, ue)
 
+        user_ue_list = self.user_ue_lists[str(listName)]
+        for ue in user_ue_list.ue_list:
+            print ue
+            self.gui.UEarea.addSentence(
+                    ue.expression, ue.meaning, 1.99, ue)
 
 if __name__ == "__main__":
     control = control()

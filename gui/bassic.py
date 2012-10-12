@@ -172,7 +172,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         
         self.actionHelp.triggered.connect(lambda: control.test("help"))
         self.actionAbout.triggered.connect(lambda: control.test("about"))
-        self.actionSettings.triggered.connect(lambda: control.test("settings"))
+        self.actionSettings.triggered.connect(lambda: control.settingsWindow())
         self.actionImport.triggered.connect(lambda: control.importButton())
         self.actionExit.setShortcut('Ctrl+I')
         self.actionExit.triggered.connect(QtGui.qApp.quit)

@@ -124,3 +124,5 @@ class Ui_ScrollArea(QtGui.QScrollArea):
             temp.append(sentence.ue)
         return temp
             
+            
+

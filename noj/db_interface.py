@@ -303,7 +303,7 @@ class DatabaseInterface(object):
             sys.exit(1)
             
     def lookup_mode_search(self, string):
-		try:
+	try:
             con = lite.connect(self.db_path)
             with con:
                 cur = con.cursor()

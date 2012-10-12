@@ -8,6 +8,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from noj.read_rc import *
+from noj.write_rc import *
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -139,10 +141,13 @@ class settingsControl(object):
     def setSettingsGui(self, gui):
         self.gui = gui
         
+        reader = ReadRC('../_noj_rc')
+        anki_path = reader.get_anki()
+
         settingsComponent = Ui_settingsComponent(self.gui, self)
         settingsComponent.setButtonText("choose file")
         settingsComponent.setLabel("Anki deck location")
-        settingsComponent.setData("/home") #get from database
+        settingsComponent.setData(anki_path) #get from database
         settingsComponent.setButtonAction(lambda: self.filechooser(settingsComponent))
         self.gui.addSettingComponent(settingsComponent)
     
@@ -154,6 +159,8 @@ class settingsControl(object):
         for settingsComponent in self.gui.components:
             data = settingsComponent.getData()
             print data
+            writer = WriteRC('../_noj_rc')
+            writer.append_anki_path(data)
 
 if __name__ == "__main__":
     import sys
